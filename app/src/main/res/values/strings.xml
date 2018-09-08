@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Effervescence 18</string>
+
+    <string-array name="menu_items_array">
+        <item>Home</item>
+        <item>Events</item>
+        <item>ProShows</item>
+        <item>Info</item>
+    </string-array>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
