@@ -10,6 +10,7 @@ import nl.psdcompany.duonavigationdrawer.widgets.DuoDrawerToggle
 import org.effervescence.app18.R
 import org.effervescence.app18.adapters.MainMenuAdapter
 import org.effervescence.app18.fragments.EventsFragment
+import org.effervescence.app18.fragments.InfoFragment
 import org.jetbrains.anko.toast
 import java.util.*
 import kotlin.collections.ArrayList
@@ -23,6 +24,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar_main)
+        //main_menu.bringToFront()
+
         mTitles = ArrayList(Arrays.asList(*resources.getStringArray(R.array.menu_items_array)))
 
         initializeDrawer()
@@ -46,7 +49,7 @@ class MainActivity : AppCompatActivity() {
                     0 -> toast("Home Fragment")
                     1 -> goToFragment(EventsFragment(), false)
                     2 -> toast("ProShows Fragment")
-                    3 -> toast("Info Fragment")
+                    3 -> goToFragment(InfoFragment(), false)
                     else -> toast("Home Fragment")
                 }
 
