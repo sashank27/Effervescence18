@@ -31,10 +31,12 @@ class InfoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val listOfSubFragments = ArrayList<Fragment>()
+
         listOfSubFragments.add(TeamFragment())
         listOfSubFragments.add(DevelopersFragment())
         listOfSubFragments.add(SponsorsFragment())
         listOfSubFragments.add(AboutUsFragment())
+
 
         val mPagerAdapter = InfoAdapter(activity!!.supportFragmentManager, listOfSubFragments)
         view.pager.adapter = mPagerAdapter
@@ -47,7 +49,7 @@ class InfoFragment : Fragment() {
 
     private inner class InfoAdapter internal constructor(fragmentManager: FragmentManager,
                                                          listOfSubFragments: List<Fragment>) : FragmentStatePagerAdapter(fragmentManager){
-        private val titles = arrayOf("TEAM", "DEVELOPERS", "SPONSORS", "ABOUT")
+        private val titles = arrayOf( "TEAM", "DEVELOPERS", "SPONSORS", "ABOUT")
         internal var fragments: ArrayList<Fragment> = ArrayList()
 
         init {
