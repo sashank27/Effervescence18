@@ -22,6 +22,7 @@ class SponsorsFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_sponsors, container, false)
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
