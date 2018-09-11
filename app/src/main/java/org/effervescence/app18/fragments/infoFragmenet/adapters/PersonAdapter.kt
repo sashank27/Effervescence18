@@ -13,10 +13,18 @@ import org.effervescence.app18.fragments.infoFragmenet.models.Person
 class PersonAdapter(val context: Context, private val itemClick : (Person) -> Unit) :
         RecyclerView.Adapter<PersonAdapter.PersonViewHolder>(){
 
+    companion object {
+        private const val TYPE_LEADER = 0
+        private const val TYPE_PERSON = 1
+    }
     private var personList = ArrayList<Person>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PersonViewHolder {
-        val itemView = LayoutInflater.from(context).inflate(R.layout.individual_person_view, parent, false)
+        val itemView = if(viewType == TYPE_PERSON)
+            LayoutInflater.from(context).inflate(R.layout.individual_person_view, parent, false)
+        else
+            LayoutInflater.from(context).inflate(R.layout.indvidual_leader_view, parent, false)
+
         return PersonViewHolder(itemView, itemClick)
     }
 
@@ -26,6 +34,11 @@ class PersonAdapter(val context: Context, private val itemClick : (Person) -> Un
         holder.bind(context, personList[position])
     }
 
+    override fun getItemViewType(position: Int): Int {
+        if(position == 0)
+            return TYPE_LEADER
+        return TYPE_PERSON
+    }
 
     fun swapList(newList : ArrayList<Person>){
         personList = newList
