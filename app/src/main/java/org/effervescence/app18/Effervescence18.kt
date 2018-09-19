@@ -7,7 +7,6 @@ class Effervescence18 : Application() {
 
     override fun onCreate() {
         super.onCreate()
-
         Toast.makeText(this, "ApplicationStarted", Toast.LENGTH_SHORT).show()
     }
 }

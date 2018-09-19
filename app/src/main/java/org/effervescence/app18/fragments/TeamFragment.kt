@@ -1,4 +1,4 @@
-package org.effervescence.app18.fragments.infoFragmenet
+package org.effervescence.app18.fragments
 
 
 import android.os.Bundle
@@ -11,8 +11,8 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_team.*
 
 import org.effervescence.app18.R
-import org.effervescence.app18.fragments.infoFragmenet.adapters.PersonAdapter
-import org.effervescence.app18.fragments.infoFragmenet.models.Person
+import org.effervescence.app18.adapters.PersonAdapter
+import org.effervescence.app18.models.Person
 
 
 class TeamFragment : Fragment() {
@@ -31,7 +31,7 @@ class TeamFragment : Fragment() {
             list.add(Person())
         }
 
-        val adapter = PersonAdapter(activity!!){
+        val adapter = PersonAdapter(activity!!) {
             Toast.makeText(activity, "This is a test message", Toast.LENGTH_SHORT).show()
         }
 

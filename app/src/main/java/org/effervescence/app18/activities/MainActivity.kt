@@ -24,15 +24,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar_main)
-        //main_menu.bringToFront()
-
         mTitles = ArrayList(Arrays.asList(*resources.getStringArray(R.array.menu_items_array)))
 
         initializeDrawer()
-
         handleDrawerMenu()
-
-//        goToFragment(EventsFragment(), false)
     }
 
     private fun handleDrawerMenu() {
@@ -52,7 +47,6 @@ class MainActivity : AppCompatActivity() {
                     3 -> goToFragment(InfoFragment(), false)
                     else -> toast("Home Fragment")
                 }
-
                 main_drawer_layout.closeDrawer()
             }
 

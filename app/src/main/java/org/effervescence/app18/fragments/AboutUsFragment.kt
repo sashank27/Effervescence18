@@ -1,4 +1,4 @@
-package org.effervescence.app18.fragments.infoFragmenet
+package org.effervescence.app18.fragments
 
 
 import android.os.Bundle

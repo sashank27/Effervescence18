@@ -1,4 +1,4 @@
-package org.effervescence.app18.fragments.infoFragmenet.adapters
+package org.effervescence.app18.adapters
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import org.effervescence.app18.R
-import org.effervescence.app18.fragments.infoFragmenet.models.Sponsor
+import org.effervescence.app18.models.Sponsor
 
 class SponsorAdapter(val context: Context, private val itemClick : (Sponsor) -> Unit) :
         RecyclerView.Adapter<SponsorAdapter.SponsorViewHolder>(){
@@ -38,7 +38,7 @@ class SponsorAdapter(val context: Context, private val itemClick : (Sponsor) -> 
 
         fun bind(context : Context, sponsor: Sponsor){
             sponsorNameView.text = sponsor.name
-            sponsorTypeView.text = sponsor.sponshorshipType
+            sponsorTypeView.text = sponsor.categories.joinToString(", ")
         }
     }
 }

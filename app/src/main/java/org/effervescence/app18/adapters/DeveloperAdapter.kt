@@ -1,4 +1,4 @@
-package org.effervescence.app18.fragments.infoFragmenet.adapters
+package org.effervescence.app18.adapters
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import org.effervescence.app18.R
-import org.effervescence.app18.fragments.infoFragmenet.models.Developer
+import org.effervescence.app18.models.Developer
 
 class DeveloperAdapter(val context: Context, private val itemClick : (Developer) -> Unit) :
         RecyclerView.Adapter<DeveloperAdapter.DeveloperViewHolder>(){
@@ -38,7 +38,7 @@ class DeveloperAdapter(val context: Context, private val itemClick : (Developer)
 
         fun bind(context : Context, Developer: Developer){
             DeveloperNameView.text = Developer.name
-            DeveloperDesignationView.text = Developer.designation
+            DeveloperDesignationView.text = Developer.position
         }
     }
 }

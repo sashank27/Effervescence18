@@ -1,4 +1,4 @@
-package org.effervescence.app18.fragments.infoFragmenet
+package org.effervescence.app18.fragments
 
 
 import android.os.Bundle
@@ -9,10 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_developers.*
-
 import org.effervescence.app18.R
-import org.effervescence.app18.fragments.infoFragmenet.adapters.DeveloperAdapter
-import org.effervescence.app18.fragments.infoFragmenet.models.Developer
+import org.effervescence.app18.adapters.DeveloperAdapter
+import org.effervescence.app18.models.Developer
 
 class DevelopersFragment : Fragment() {
 
@@ -30,7 +29,7 @@ class DevelopersFragment : Fragment() {
             list.add(Developer())
         }
 
-        val adapter = DeveloperAdapter(activity!!){
+        val adapter = DeveloperAdapter(activity!!) {
             Toast.makeText(activity, "This is a test message", Toast.LENGTH_SHORT).show()
         }
 

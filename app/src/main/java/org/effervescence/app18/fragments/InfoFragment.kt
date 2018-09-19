@@ -11,11 +11,6 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_info.view.*
 
 import org.effervescence.app18.R
-import org.effervescence.app18.fragments.infoFragmenet.AboutUsFragment
-import org.effervescence.app18.fragments.infoFragmenet.DevelopersFragment
-import org.effervescence.app18.fragments.infoFragmenet.SponsorsFragment
-import org.effervescence.app18.fragments.infoFragmenet.TeamFragment
-
 
 class InfoFragment : Fragment() {
 
