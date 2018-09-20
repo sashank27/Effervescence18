@@ -1,4 +1,4 @@
-package org.effervescence.app18.fragments.infoFragmenet
+package org.effervescence.app18.fragments
 
 
 import android.os.Bundle
@@ -8,11 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import kotlinx.android.synthetic.main.fragment_sponsors.*
-
 import org.effervescence.app18.R
-import org.effervescence.app18.fragments.infoFragmenet.adapters.SponsorAdapter
-import org.effervescence.app18.fragments.infoFragmenet.models.Sponsor
+import kotlinx.android.synthetic.main.fragment_sponsors.*
+import org.effervescence.app18.adapters.SponsorAdapter
+import org.effervescence.app18.models.Sponsor
 
 class SponsorsFragment : Fragment() {
 
@@ -31,7 +30,7 @@ class SponsorsFragment : Fragment() {
             list.add(Sponsor())
         }
 
-        val adapter = SponsorAdapter(activity!!){
+        val adapter = SponsorAdapter(activity!!) {
             Toast.makeText(activity, "This is a test message", Toast.LENGTH_SHORT).show()
         }
 

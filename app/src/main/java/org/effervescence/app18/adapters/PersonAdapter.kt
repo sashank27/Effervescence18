@@ -1,4 +1,4 @@
-package org.effervescence.app18.fragments.infoFragmenet.adapters
+package org.effervescence.app18.adapters
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import org.effervescence.app18.R
-import org.effervescence.app18.fragments.infoFragmenet.models.Person
+import org.effervescence.app18.models.Person
 
 class PersonAdapter(val context: Context, private val itemClick : (Person) -> Unit) :
         RecyclerView.Adapter<PersonAdapter.PersonViewHolder>(){
@@ -51,7 +51,7 @@ class PersonAdapter(val context: Context, private val itemClick : (Person) -> Un
 
         fun bind(context : Context, person: Person){
             personNameView.text = person.name
-            personDesignationView.text = person.designation
+            personDesignationView.text = person.position
         }
     }
 }
