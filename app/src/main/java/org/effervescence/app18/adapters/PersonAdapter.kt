@@ -45,8 +45,8 @@ class PersonAdapter(val context: Context, private val itemClick : (Person) -> Un
         notifyDataSetChanged()
     }
     inner class PersonViewHolder(itemView: View, private val itemClick: (Person) -> Unit) : RecyclerView.ViewHolder(itemView){
-        private val personImageView = itemView.findViewById<ImageView>(R.id.developerImage)
-        private val personNameView = itemView.findViewById<TextView>(R.id.developerNameTextView)
+        private val personImageView = itemView.findViewById<ImageView>(R.id.eventImage)
+        private val personNameView = itemView.findViewById<TextView>(R.id.eventNameTextView)
         private val personDesignationView = itemView.findViewById<TextView>(R.id.personDesignationTextView)
 
         fun bind(context : Context, person: Person){

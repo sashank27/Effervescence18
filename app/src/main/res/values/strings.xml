@@ -9,4 +9,9 @@
     </string-array>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="cd_second_item_image">second item image</string>
+    <string name="cd_avatar">avatar</string>
+    <string name="cd_header_background">header background</string>
+    <string name="cd_header_item_background">header item background</string>
 </resources>

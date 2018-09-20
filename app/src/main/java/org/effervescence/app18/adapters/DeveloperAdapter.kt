@@ -32,8 +32,8 @@ class DeveloperAdapter(val context: Context, private val itemClick : (Developer)
         notifyDataSetChanged()
     }
     inner class DeveloperViewHolder(itemView: View, private val itemClick: (Developer) -> Unit) : RecyclerView.ViewHolder(itemView){
-        private val DeveloperImageView = itemView.findViewById<ImageView>(R.id.developerImage)
-        private val DeveloperNameView = itemView.findViewById<TextView>(R.id.developerNameTextView)
+        private val DeveloperImageView = itemView.findViewById<ImageView>(R.id.eventImage)
+        private val DeveloperNameView = itemView.findViewById<TextView>(R.id.eventNameTextView)
         private val DeveloperDesignationView = itemView.findViewById<TextView>(R.id.developerDesignationTextView)
 
         fun bind(context : Context, Developer: Developer){

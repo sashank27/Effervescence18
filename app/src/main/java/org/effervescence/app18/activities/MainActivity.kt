@@ -1,5 +1,6 @@
 package org.effervescence.app18.activities
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -9,6 +10,7 @@ import nl.psdcompany.duonavigationdrawer.views.DuoMenuView
 import nl.psdcompany.duonavigationdrawer.widgets.DuoDrawerToggle
 import org.effervescence.app18.R
 import org.effervescence.app18.adapters.MainMenuAdapter
+import org.effervescence.app18.events.EventsActivity
 import org.effervescence.app18.fragments.EventsFragment
 import org.effervescence.app18.fragments.InfoFragment
 import org.jetbrains.anko.toast
@@ -42,7 +44,7 @@ class MainActivity : AppCompatActivity() {
 
                 when (position) {
                     0 -> toast("Home Fragment")
-                    1 -> goToFragment(EventsFragment(), false)
+                    1 -> startActivity(Intent(this@MainActivity, EventsActivity::class.java))
                     2 -> toast("ProShows Fragment")
                     3 -> goToFragment(InfoFragment(), false)
                     else -> toast("Home Fragment")
