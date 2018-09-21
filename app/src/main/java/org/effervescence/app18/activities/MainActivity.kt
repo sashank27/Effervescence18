@@ -11,6 +11,7 @@ import org.effervescence.app18.R
 import org.effervescence.app18.adapters.MainMenuAdapter
 import org.effervescence.app18.fragments.EventsFragment
 import org.effervescence.app18.fragments.InfoFragment
+import org.effervescence.app18.fragments.UpdatesFragment
 import org.jetbrains.anko.toast
 import java.util.*
 import kotlin.collections.ArrayList
@@ -44,7 +45,8 @@ class MainActivity : AppCompatActivity() {
                     0 -> toast("Home Fragment")
                     1 -> goToFragment(EventsFragment(), false)
                     2 -> toast("ProShows Fragment")
-                    3 -> goToFragment(InfoFragment(), false)
+                    3 -> goToFragment(UpdatesFragment(), false)
+                    4 -> goToFragment(InfoFragment(), false)
                     else -> toast("Home Fragment")
                 }
                 main_drawer_layout.closeDrawer()

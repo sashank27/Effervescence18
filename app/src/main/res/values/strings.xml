@@ -5,8 +5,11 @@
         <item>Home</item>
         <item>Events</item>
         <item>ProShows</item>
+        <item>Updates</item>
         <item>Info</item>
     </string-array>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="channel_name">effe18_channel</string>
+    <string name="channel_description">effe18_channel_description</string>
 </resources>
