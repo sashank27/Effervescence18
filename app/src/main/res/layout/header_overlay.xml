@@ -9,6 +9,7 @@
     app:layout_behavior="org.effervescence.app18.events.header.HeaderOverlayBehavior"
     tools:ignore="MergeRootFrame">
 
+
     <FrameLayout
         android:id="@+id/texts"
         android:layout_width="match_parent"
