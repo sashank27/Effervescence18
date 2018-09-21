@@ -4,9 +4,12 @@ import android.animation.ObjectAnimator
 import android.graphics.Rect
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.HandlerThread
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewPager
 import android.support.v7.graphics.drawable.DrawerArrowDrawable
+import android.util.Log
 import android.widget.FrameLayout
 import com.ramotion.navigationtoolbar.HeaderLayout
 import com.ramotion.navigationtoolbar.HeaderLayoutManager
@@ -19,15 +22,14 @@ import org.effervescence.app18.events.header.HeaderItemTransformer
 import org.effervescence.app18.events.pager.ViewPagerAdapter
 import org.effervescence.app18.models.Event
 import org.effervescence.app18.utils.AppDB
+import org.jetbrains.anko.doAsync
 import kotlin.math.ceil
 import kotlin.math.max
 
 class EventsActivity : AppCompatActivity() {
 
     private val itemCount = 9
-    private val dataSet = ExampleDataSet()
 
-    private var isExpanded = true
     private var prevAnchorPosition = 0
     val eventData = HashMap<String, List<Event>>()
 
@@ -35,24 +37,36 @@ class EventsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_events)
 
-        val appDB = AppDB.getInstance(this)
-
-
-        eventData["Main Stage"] = appDB.getEventsOfCategory("main stage")
-        eventData["Dramatics"] = appDB.getEventsOfCategory("dramatics")
-        eventData["Music"] = appDB.getEventsOfCategory("music")
-        eventData["Dance"] = appDB.getEventsOfCategory("dance")
-        eventData["Fine Arts"] = appDB.getEventsOfCategory("fine arts")
-        eventData["AMS"] = appDB.getEventsOfCategory("AMS")
-        eventData["Literature"] = appDB.getEventsOfCategory("literature")
-        eventData["Gaming"] = appDB.getEventsOfCategory("gaming")
-        eventData["Informal"] = appDB.getEventsOfCategory("informal")
-
         val header = findViewById<NavigationToolBarLayout>(R.id.navigation_toolbar_layout)
         val viewPager = findViewById<ViewPager>(R.id.pager)
+
+        doAsync {
+            val appDB = AppDB.getInstance(this@EventsActivity)
+
+
+            eventData["Main Stage"] = appDB.getEventsOfCategory("main stage")
+            eventData["Dramatics"] = appDB.getEventsOfCategory("dramatics")
+            eventData["Music"] = appDB.getEventsOfCategory("music")
+            eventData["Dance"] = appDB.getEventsOfCategory("dance")
+            eventData["Fine Arts"] = appDB.getEventsOfCategory("fine arts")
+            eventData["AMS"] = appDB.getEventsOfCategory("AMS")
+            eventData["Literature"] = appDB.getEventsOfCategory("literature")
+            eventData["Gaming"] = appDB.getEventsOfCategory("gaming")
+            eventData["Informal"] = appDB.getEventsOfCategory("informal")
+
+            Log.d("Sending", "Response is here")
+            runOnUiThread {
+                initViewPager(header, viewPager)
+
+            }
+
+        }
+
+
+
         initActionBar()
-        initViewPager(header, viewPager)
         initHeader(header, viewPager)
+
     }
 
 
@@ -84,7 +98,9 @@ class EventsActivity : AppCompatActivity() {
         val headerOverlay = findViewById<FrameLayout>(R.id.header_overlay)
         header.setItemTransformer(HeaderItemTransformer(headerOverlay,
                 titleLeftOffset, lineRightOffset, lineBottomOffset, lineTitleOffset))
-        header.setAdapter(HeaderAdapter(itemCount, dataSet.headerDataSet, headerOverlay))
+        val adapter = HeaderAdapter(itemCount, headerOverlay)
+        header.setAdapter(adapter)
+
 
         header.addItemChangeListener(object : HeaderLayoutManager.ItemChangeListener {
             override fun onItemChangeStarted(position: Int) {
@@ -112,35 +128,37 @@ class EventsActivity : AppCompatActivity() {
         drawerArrow.color = ContextCompat.getColor(this, android.R.color.white)
         drawerArrow.progress = 1f
 
-        header.addHeaderChangeStateListener(object : HeaderLayoutManager.HeaderChangeStateListener() {
-            private fun changeIcon(progress: Float) {
-                ObjectAnimator.ofFloat(drawerArrow, "progress", progress).start()
-                isExpanded = progress == 1f
-                if (isExpanded) {
-                    prevAnchorPosition = header.getAnchorPos()
-                }
-            }
-
-            override fun onMiddle() = changeIcon(0f)
-            override fun onExpanded() = changeIcon(1f)
-        })
+//        header.addHeaderChangeStateListener(object : HeaderLayoutManager.HeaderChangeStateListener() {
+//            private fun changeIcon(progress: Float) {
+//                ObjectAnimator.ofFloat(drawerArrow, "progress", progress).start()
+//                isExpanded = progress == 1f
+//                if (isExpanded) {
+//                    prevAnchorPosition = header.getAnchorPos()
+//                }
+//            }
+//
+//            override fun onMiddle() = changeIcon(0f)
+//            override fun onExpanded() = changeIcon(1f)
+//        })
 
         val toolbar = header.toolBar
         toolbar.navigationIcon = drawerArrow
         toolbar.setNavigationOnClickListener {
-            if (!isExpanded) {
-                return@setNavigationOnClickListener
-            }
-            val anchorPos = header.getAnchorPos()
-            if (anchorPos == HeaderLayout.INVALID_POSITION) {
-                return@setNavigationOnClickListener
-            }
+//            if (!isExpanded) {
+//                return@setNavigationOnClickListener
+//            }
+//            val anchorPos = header.getAnchorPos()
+//            if (anchorPos == HeaderLayout.INVALID_POSITION) {
+//                return@setNavigationOnClickListener
+//            }
+//
+//            if (anchorPos == prevAnchorPosition) {
+//                header.collapse()
+//            } else {
+//                header.smoothScrollToPosition(prevAnchorPosition)
+//            }
 
-            if (anchorPos == prevAnchorPosition) {
-                header.collapse()
-            } else {
-                header.smoothScrollToPosition(prevAnchorPosition)
-            }
+            onBackPressed()
         }
     }
 
@@ -165,6 +183,8 @@ class EventsActivity : AppCompatActivity() {
 
         header.addItemDecoration(decorator)
         header.addHeaderChangeListener(decorator)
+
+
     }
 }
 

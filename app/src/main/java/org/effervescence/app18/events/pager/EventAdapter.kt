@@ -1,20 +1,24 @@
 package org.effervescence.app18.events.pager
 
 import android.content.Context
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
 import org.effervescence.app18.R
 import org.effervescence.app18.models.Event
+import java.text.SimpleDateFormat
+import java.util.*
 
 class EventAdapter(val context: Context, private val itemClick : (Event) -> Unit) :
         RecyclerView.Adapter<EventAdapter.EventViewHolder>(){
 
     private var EventList = ArrayList<Event>()
-
+    private var placeholder = ContextCompat.getDrawable(context, R.drawable.placeholder_event)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {
         val itemView = LayoutInflater.from(context).inflate(R.layout.list_item_event, parent, false)
         return EventViewHolder(itemView, itemClick)
@@ -41,8 +45,28 @@ class EventAdapter(val context: Context, private val itemClick : (Event) -> Unit
 
         fun bind(context : Context, Event: Event){
             EventNameView.text = Event.name
-            EventDayView.text = Event.timestamp.toString()
             EventLocationTextView.text = Event.location
+
+            if(Event.timestamp < 100L){
+                EventLocationTextView.text = "Online"
+                EventTimeView.visibility = View.INVISIBLE
+                EventDayView.visibility = View.INVISIBLE
+            } else {
+                EventTimeView.visibility = View.VISIBLE
+                EventDayView.visibility = View.VISIBLE
+            }
+            val calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/India"))
+            calendar.timeInMillis = Event.timestamp.times(1000L)
+
+            val sdf = SimpleDateFormat("hh:mm a")
+            sdf.timeZone = TimeZone.getTimeZone("Asia/India")
+
+            EventTimeView.text = sdf.format(calendar.time)
+
+            sdf.applyPattern("MMMM d, yyyy")
+            EventDayView.text = sdf.format(calendar.time)
+
+            Glide.with(context).load(Event.imageUrl).into(EventImageView)
         }
     }
 }

@@ -7,12 +7,12 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import com.ramotion.navigationtoolbar.HeaderLayout
 import org.effervescence.app18.R
-import org.effervescence.app18.events.HeaderDataSet
+
 
 class HeaderAdapter(
         private val count: Int,
-        private val dataSet: HeaderDataSet,
         overlay: FrameLayout) : HeaderLayout.Adapter<HeaderItem>() {
+
 
     private val textsLayout = overlay.findViewById<FrameLayout>(R.id.texts)
     private val linesLayout = overlay.findViewById<FrameLayout>(R.id.lines)
@@ -25,7 +25,7 @@ class HeaderAdapter(
     }
 
     override fun onBindViewHolder(holder: HeaderItem, position: Int) {
-        holder.setContent(dataSet.getItemData(position), getNextOverlayTitle(), getNextOverlayLine())
+        holder.setContent(position, getNextOverlayTitle(), getNextOverlayLine())
     }
 
     override fun onViewRecycled(holder: HeaderItem) {

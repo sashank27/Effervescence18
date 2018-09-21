@@ -22,6 +22,7 @@
         <android.support.v7.widget.AppCompatTextView style="@style/HeaderItemTextStyle"/>
         <android.support.v7.widget.AppCompatTextView style="@style/HeaderItemTextStyle"/>
         <android.support.v7.widget.AppCompatTextView style="@style/HeaderItemTextStyle"/>
+        <android.support.v7.widget.AppCompatTextView style="@style/HeaderItemTextStyle"/>
 
     </FrameLayout>
 
@@ -30,6 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <View style="@style/HeaderItemLineStyle"/>
         <View style="@style/HeaderItemLineStyle"/>
         <View style="@style/HeaderItemLineStyle"/>
         <View style="@style/HeaderItemLineStyle"/>
