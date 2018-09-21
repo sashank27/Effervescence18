@@ -11,15 +11,16 @@ import kotlinx.android.synthetic.main.activity_splash.*
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.effervescence.app18.R
-import org.effervescence.app18.models.Developer
-import org.effervescence.app18.models.Event
-import org.effervescence.app18.models.Person
-import org.effervescence.app18.models.Sponsor
+import org.effervescence.app18.models.*
 import org.effervescence.app18.utils.AnimatorListenerAdapter
 import org.effervescence.app18.utils.AppDB
+import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.*
+import org.json.JSONObject
 
-class SplashActivity : AppCompatActivity(),AnkoLogger {
+class SplashActivity : AppCompatActivity(), AnkoLogger {
 
     private lateinit var sharedPrefs: SharedPreferences
 
@@ -105,7 +106,7 @@ class SplashActivity : AppCompatActivity(),AnkoLogger {
                         .build()
                 val response4 = client.newCall(request4).execute()
 
-                if(response4.isSuccessful) {
+                if (response4.isSuccessful) {
                     val developersArray = Moshi.Builder().build()
                             .adapter<Array<Developer>>(Array<Developer>::class.java)
                             .fromJson(response4.body()?.string())
@@ -114,6 +115,29 @@ class SplashActivity : AppCompatActivity(),AnkoLogger {
                         appDB.storeDevelopers(developersArray.toList())
                     }
                 }
+
+                /*
+                val request5 = Request.Builder()
+                        .url("https://effervescence18-6e63f.firebaseio.com/updates.json")
+                        .build()
+                val response5 = client.newCall(request5).execute()
+
+                if (response5.isSuccessful) {
+                    val updatesList = ArrayList<Update>()
+                    val responseBody = JSONObject(response5.body()?.string())
+                    val keys = responseBody.keys()
+
+                    while (keys.hasNext()) {
+                        val currentKey = keys.next()
+                        val currentUpdate = responseBody.getJSONObject(currentKey)
+                        updatesList.add(Update(currentKey,
+                                currentUpdate.optString("title"),
+                                currentUpdate.optString("description"),
+                                currentUpdate.optLong("timestamp")))
+                    }
+                    appDB.storeUpdates(updatesList)
+                }
+                */
 
                 uiThread {
                     if (!response.isSuccessful || !response2.isSuccessful || !response3.isSuccessful || !response4.isSuccessful) {
