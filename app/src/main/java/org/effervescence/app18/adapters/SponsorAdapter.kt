@@ -1,12 +1,15 @@
 package org.effervescence.app18.adapters
 
 import android.content.Context
+import android.net.Uri
+import android.support.customtabs.CustomTabsIntent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
 import org.effervescence.app18.R
 import org.effervescence.app18.models.Sponsor
 
@@ -27,8 +30,9 @@ class SponsorAdapter(val context: Context, private val itemClick : (Sponsor) -> 
     }
 
 
-    fun swapList(newList : ArrayList<Sponsor>){
-        developerList = newList
+    fun swapList(newList :List<Sponsor>){
+        developerList.clear()
+        developerList.addAll(newList)
         notifyDataSetChanged()
     }
     inner class SponsorViewHolder(itemView: View, private val itemClick: (Sponsor) -> Unit) : RecyclerView.ViewHolder(itemView){
@@ -36,9 +40,17 @@ class SponsorAdapter(val context: Context, private val itemClick : (Sponsor) -> 
         private val sponsorNameView = itemView.findViewById<TextView>(R.id.sponsorNameTextView)
         private val sponsorTypeView = itemView.findViewById<TextView>(R.id.sponsorTypeTextView)
 
-        fun bind(context : Context, sponsor: Sponsor){
+        fun bind(context : Context, sponsor: Sponsor) {
             sponsorNameView.text = sponsor.name
             sponsorTypeView.text = sponsor.categories.joinToString(", ")
+            Glide.with(sponsorImageView).load(sponsor.imageUrl).into(sponsorImageView)
+
+            itemView.setOnClickListener {
+                val builder = CustomTabsIntent.Builder()
+                val customTabsIntent = builder.build()
+                if(sponsor.website.isNotEmpty())
+                    customTabsIntent.launchUrl(context, Uri.parse(sponsor.website))
+            }
         }
     }
 }

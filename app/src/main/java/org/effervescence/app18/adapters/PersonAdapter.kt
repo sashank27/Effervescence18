@@ -1,12 +1,22 @@
 package org.effervescence.app18.adapters
 
+import android.Manifest
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
+import android.support.v4.app.ActivityCompat
+import android.support.v4.content.ContextCompat
+import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
 import org.effervescence.app18.R
 import org.effervescence.app18.models.Person
 
@@ -40,8 +50,9 @@ class PersonAdapter(val context: Context, private val itemClick : (Person) -> Un
         return TYPE_PERSON
     }
 
-    fun swapList(newList : ArrayList<Person>){
-        personList = newList
+    fun swapList(newList : List<Person>){
+        personList.clear()
+        personList.addAll(newList)
         notifyDataSetChanged()
     }
     inner class PersonViewHolder(itemView: View, private val itemClick: (Person) -> Unit) : RecyclerView.ViewHolder(itemView){
@@ -52,6 +63,21 @@ class PersonAdapter(val context: Context, private val itemClick : (Person) -> Un
         fun bind(context : Context, person: Person){
             personNameView.text = person.name
             personDesignationView.text = person.position
+
+            Glide.with(personImageView).load(person.imageUrl).into(personImageView)
+
+            itemView.setOnClickListener {
+                val callNumber = person.contact
+                if (ContextCompat.checkSelfPermission(context,
+                                Manifest.permission.CALL_PHONE)
+                        != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(context as Activity,
+                            arrayOf(Manifest.permission.CALL_PHONE),
+                            123)
+                }
+                else
+                    context.startActivity(Intent(Intent.ACTION_CALL).setData(Uri.parse("tel:" + callNumber)))
+            }
         }
     }
 }

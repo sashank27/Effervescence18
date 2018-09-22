@@ -5,6 +5,11 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
+    <uses-permission-sdk-23 android:name="android.permission.CALL_PHONE" />
+
+
     <application
         android:name=".Effervescence18"
         android:allowBackup="true"
@@ -21,7 +26,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".events.EventsActivity" android:theme="@style/EventsTheme"></activity>
+        <activity
+            android:name=".activities.EventsActivity"
+            android:theme="@style/EventsTheme" />
+        <activity
+            android:name=".activities.EventDetailActivity"
+            android:label="Temp"
+            android:theme="@style/EventsDetialTheme" />
     </application>
 
 </manifest>

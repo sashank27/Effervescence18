@@ -9,14 +9,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/header_background_gradient"/>
-
-    <ImageView
-        android:alpha="0.08"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/header_background"
-        android:scaleType="centerCrop"
-        android:contentDescription="@string/cd_header_background" />
-
 </FrameLayout>
 

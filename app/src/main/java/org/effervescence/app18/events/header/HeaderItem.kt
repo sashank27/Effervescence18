@@ -1,11 +1,13 @@
 package org.effervescence.app18.events.header
 
 import android.view.View
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.ramotion.navigationtoolbar.HeaderLayout
 import org.effervescence.app18.R
+import org.jetbrains.anko.find
 
 class HeaderItem(view: View) : HeaderLayout.ViewHolder(view) {
     private val gradient = view.findViewById<View>(R.id.gradient)
@@ -18,8 +20,11 @@ class HeaderItem(view: View) : HeaderLayout.ViewHolder(view) {
     private val headerTitles = arrayOf("Main Stage", "Dramatics", "Music", "Dance", "Fine Arts", "AMS", "Literature", "Gaming", "Informal")
     private val headerGradients = intArrayOf(R.drawable.card_1_gradient, R.drawable.card_2_gradient, R.drawable.card_3_gradient, R.drawable.card_4_gradient).toTypedArray()
 
+
+
     internal var overlayTitle: TextView? = null
     internal var overlayLine: View? = null
+
 
     fun setContent(position: Int, title: TextView?, line: View?) {
         gradient.setBackgroundResource(headerGradients[position%4])
@@ -37,6 +42,8 @@ class HeaderItem(view: View) : HeaderLayout.ViewHolder(view) {
             it.visibility = View.VISIBLE
         }
     }
+
+
 
     fun clearContent() {
         overlayTitle?.also {

@@ -26,6 +26,7 @@ class HeaderAdapter(
 
     override fun onBindViewHolder(holder: HeaderItem, position: Int) {
         holder.setContent(position, getNextOverlayTitle(), getNextOverlayLine())
+
     }
 
     override fun onViewRecycled(holder: HeaderItem) {

@@ -25,6 +25,12 @@
         <item name="windowNoTitle">true</item>
         <item name="android:textColorSecondary">@android:color/white</item>
         <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowActivityTransitions">true</item>
+    </style>
+
+    <style name="EventsDetialTheme" parent="EventsTheme">
+        <item name="android:windowEnterTransition">@transition/event_detail_transition_out</item>
+        <item name="android:windowExitTransition">@transition/event_detail_transition_out</item>
     </style>
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
@@ -49,4 +55,8 @@
         <item name="android:background">@android:color/white</item>
         <item name="android:visibility">gone</item>
     </style>
+
+    <style name="AppThemeNoActionBar.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppThemeNoActionBar.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

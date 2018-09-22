@@ -1,11 +1,11 @@
-package org.effervescence.app18.events
+package org.effervescence.app18.activities
 
-import android.animation.ObjectAnimator
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Rect
+import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.os.HandlerThread
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewPager
 import android.support.v7.graphics.drawable.DrawerArrowDrawable
@@ -16,7 +16,6 @@ import com.ramotion.navigationtoolbar.HeaderLayoutManager
 import com.ramotion.navigationtoolbar.NavigationToolBarLayout
 import com.ramotion.navigationtoolbar.SimpleSnapHelper
 import org.effervescence.app18.R
-import org.effervescence.app18.R.id.navigation_toolbar_layout
 import org.effervescence.app18.events.header.HeaderAdapter
 import org.effervescence.app18.events.header.HeaderItemTransformer
 import org.effervescence.app18.events.pager.ViewPagerAdapter

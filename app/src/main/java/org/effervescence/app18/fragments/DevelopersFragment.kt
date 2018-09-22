@@ -12,6 +12,7 @@ import kotlinx.android.synthetic.main.fragment_developers.*
 import org.effervescence.app18.R
 import org.effervescence.app18.adapters.DeveloperAdapter
 import org.effervescence.app18.models.Developer
+import org.effervescence.app18.utils.AppDB
 
 class DevelopersFragment : Fragment() {
 
@@ -24,10 +25,9 @@ class DevelopersFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val list = ArrayList<Developer>()
-        for(i in 0 until 20){
-            list.add(Developer())
-        }
+        val appDb = AppDB.getInstance(activity!!)
+        val list = appDb.getAllDeveloperMembers()
+
 
         val adapter = DeveloperAdapter(activity!!) {
             Toast.makeText(activity, "This is a test message", Toast.LENGTH_SHORT).show()

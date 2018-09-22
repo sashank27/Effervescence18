@@ -13,6 +13,7 @@ import kotlinx.android.synthetic.main.fragment_team.*
 import org.effervescence.app18.R
 import org.effervescence.app18.adapters.PersonAdapter
 import org.effervescence.app18.models.Person
+import org.effervescence.app18.utils.AppDB
 
 
 class TeamFragment : Fragment() {
@@ -26,10 +27,8 @@ class TeamFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val list = ArrayList<Person>()
-        for(i in 0 until 20){
-            list.add(Person())
-        }
+        val appDb = AppDB.getInstance(activity!!)
+        val list = appDb.getAllTeamMembers()
 
         val adapter = PersonAdapter(activity!!) {
             Toast.makeText(activity, "This is a test message", Toast.LENGTH_SHORT).show()

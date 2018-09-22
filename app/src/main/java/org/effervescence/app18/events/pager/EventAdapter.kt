@@ -1,7 +1,11 @@
 package org.effervescence.app18.events.pager
 
+import android.app.Activity
+import android.app.ActivityOptions
 import android.content.Context
+import android.content.Intent
 import android.support.v4.content.ContextCompat
+import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +14,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import org.effervescence.app18.R
+import org.effervescence.app18.activities.EventDetailActivity
 import org.effervescence.app18.models.Event
 import java.text.SimpleDateFormat
 import java.util.*
@@ -43,11 +48,11 @@ class EventAdapter(val context: Context, private val itemClick : (Event) -> Unit
         private val EventDayView = itemView.findViewById<TextView>(R.id.eventDayTextView)
         private val EventLocationTextView = itemView.findViewById<TextView>(R.id.eventLocation)
 
-        fun bind(context : Context, Event: Event){
-            EventNameView.text = Event.name
-            EventLocationTextView.text = Event.location
+        fun bind(context : Context, event: Event){
+            EventNameView.text = event.name
+            EventLocationTextView.text = event.location
 
-            if(Event.timestamp < 100L){
+            if(event.timestamp < 100L){
                 EventLocationTextView.text = "Online"
                 EventTimeView.visibility = View.INVISIBLE
                 EventDayView.visibility = View.INVISIBLE
@@ -56,7 +61,7 @@ class EventAdapter(val context: Context, private val itemClick : (Event) -> Unit
                 EventDayView.visibility = View.VISIBLE
             }
             val calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/India"))
-            calendar.timeInMillis = Event.timestamp.times(1000L)
+            calendar.timeInMillis = event.timestamp.times(1000L)
 
             val sdf = SimpleDateFormat("hh:mm a")
             sdf.timeZone = TimeZone.getTimeZone("Asia/India")
@@ -66,7 +71,12 @@ class EventAdapter(val context: Context, private val itemClick : (Event) -> Unit
             sdf.applyPattern("MMMM d, yyyy")
             EventDayView.text = sdf.format(calendar.time)
 
-            Glide.with(context).load(Event.imageUrl).into(EventImageView)
+            Glide.with(context).load(event.imageUrl).into(EventImageView)
+
+            itemView.setOnClickListener { val intent = Intent(context, EventDetailActivity::class.java)
+                val optionsCompat = ActivityOptions.makeSceneTransitionAnimation(context as Activity)
+            intent.putExtra("event", event)
+            startActivity(context, intent, optionsCompat.toBundle())}
         }
     }
 }

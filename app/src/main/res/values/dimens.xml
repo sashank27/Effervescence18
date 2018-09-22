@@ -5,4 +5,6 @@
     <dimen name="line_right_offset">20dp</dimen>
     <dimen name="line_bottom_offset">20dp</dimen>
     <dimen name="line_title_offset">10dp</dimen>
+    <dimen name="app_bar_height">220dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
 </resources>
