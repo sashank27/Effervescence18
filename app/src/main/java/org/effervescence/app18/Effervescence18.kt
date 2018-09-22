@@ -5,6 +5,7 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.os.Build
 import android.widget.Toast
+import com.google.firebase.messaging.FirebaseMessaging
 import org.effervescence.app18.utils.MyNotificationManager
 
 class Effervescence18 : Application() {
@@ -12,6 +13,7 @@ class Effervescence18 : Application() {
     override fun onCreate() {
         super.onCreate()
 
+        FirebaseMessaging.getInstance().subscribeToTopic("all")
         createNotificationChannel()
     }
 
