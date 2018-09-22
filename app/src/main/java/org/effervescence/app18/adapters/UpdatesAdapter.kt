@@ -38,13 +38,13 @@ class UpdatesAdapter(private val mContext: Context): RecyclerView.Adapter<Update
 
     inner class UpdateViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 
-        private val title = itemView.find<TextView>(R.id.update_title)
-        private val description = itemView.find<TextView>(R.id.update_description)
-        private val timestamp = itemView.find<TextView>(R.id.update_timestamp)
+        private val title = itemView.find<TextView>(R.id.titleTV)
+        private val description = itemView.find<TextView>(R.id.descriptionTV)
+        private val timestamp = itemView.find<TextView>(R.id.timeTV)
 
         fun bind(update: Update) {
             title.text = update.title
-            description .text= update.description
+            description.text= update.description
 
             val calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/India"))
             calendar.timeInMillis = update.timestamp.times(1000L)

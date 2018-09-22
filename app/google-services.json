@@ -1,0 +1,115 @@
+{
+  "project_info": {
+    "project_number": "557844057423",
+    "firebase_url": "https://effervescence18-6e63f.firebaseio.com",
+    "project_id": "effervescence18-6e63f",
+    "storage_bucket": "effervescence18-6e63f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:557844057423:android:f73d68ac74dd202a",
+        "android_client_info": {
+          "package_name": "org.effervescence.app18"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "557844057423-2q3uctoqoak2b0l6jruf52duurtqguso.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.effervescence.app18",
+            "certificate_hash": "d9eb6f8021e2061442956a4a822d9e667d115a96"
+          }
+        },
+        {
+          "client_id": "557844057423-ojnpcfgl9k1hgrlg5ateee41rqr5icj8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.effervescence.app18",
+            "certificate_hash": "edb0875b46713fcfd24b373a8d7342000c6f51b3"
+          }
+        },
+        {
+          "client_id": "557844057423-llhejf5708cov5k9ve5kaeg9hv7r1l89.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAH0Koz77G6oPZ7g4E3_yQqgwFtTniXD2M"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "557844057423-llhejf5708cov5k9ve5kaeg9hv7r1l89.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:557844057423:android:90e3be6707063d44",
+        "android_client_info": {
+          "package_name": "org.effervescence.app18.organiser"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "557844057423-p4qq0uuou1kfnb4pgs7asdn7d53p66kl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.effervescence.app18.organiser",
+            "certificate_hash": "edb0875b46713fcfd24b373a8d7342000c6f51b3"
+          }
+        },
+        {
+          "client_id": "557844057423-49hsu87ajvmtene66efkuc0ibpuksug4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.effervescence.app18.organiser",
+            "certificate_hash": "d9eb6f8021e2061442956a4a822d9e667d115a96"
+          }
+        },
+        {
+          "client_id": "557844057423-llhejf5708cov5k9ve5kaeg9hv7r1l89.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAH0Koz77G6oPZ7g4E3_yQqgwFtTniXD2M"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "557844057423-llhejf5708cov5k9ve5kaeg9hv7r1l89.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
