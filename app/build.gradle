@@ -32,11 +32,11 @@ dependencies {
     implementation 'com.android.support:support-v4:27.1.1'
     implementation 'com.android.support:design:27.1.1'
     implementation 'com.android.support:cardview-v7:27.1.1'
-<<<<<<< HEAD
-    implementation 'com.android.support:customtabs:27.1.1'
-=======
 
->>>>>>> 47704b426c01bb2855e06c6ab171c1ba27703e30
+    implementation 'com.android.support:customtabs:27.1.1'
+
+
+
     implementation 'nl.psdcompany:duo-navigation-drawer:2.0.8'
     implementation 'org.jetbrains.anko:anko-commons:0.10.5'
     implementation 'de.hdodenhof:circleimageview:2.2.0'
