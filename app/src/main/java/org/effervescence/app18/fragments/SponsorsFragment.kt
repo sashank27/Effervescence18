@@ -12,6 +12,7 @@ import org.effervescence.app18.R
 import kotlinx.android.synthetic.main.fragment_sponsors.*
 import org.effervescence.app18.adapters.SponsorAdapter
 import org.effervescence.app18.models.Sponsor
+import org.effervescence.app18.utils.AppDB
 
 class SponsorsFragment : Fragment() {
 
@@ -25,10 +26,9 @@ class SponsorsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val list = ArrayList<Sponsor>()
-        for(i in 0 until 20){
-            list.add(Sponsor())
-        }
+        val appDb = AppDB.getInstance(activity!!)
+        val list = appDb.getAllSponsors()
+        list.sortBy { it.priority }
 
         val adapter = SponsorAdapter(activity!!) {
             Toast.makeText(activity, "This is a test message", Toast.LENGTH_SHORT).show()

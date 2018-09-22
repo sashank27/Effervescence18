@@ -10,6 +10,18 @@
     </string-array>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string name="cd_second_item_image">second item image</string>
+    <string name="cd_avatar">avatar</string>
+    <string name="cd_header_background">header background</string>
+    <string name="cd_header_item_background">header item background</string>
+
+    <string name="about_effe">EFFERVESCENCE (fondly nicknamed EFFE) is the annual cultural festival of IIIT Allahabad and it’s the second largest college fest in Uttar Pradesh and well renowned in India. Generally held in mid October, it attracts national as well as international participation in its multiple events during the fest. It is committed to creating an unforgettable experience for all its visitors, along with providing people from different areas a chance to showcase their talents, explore their hidden potential and win gigantic cash prizes in a very competitive yet learning environment.
+    </string>
+
+    <string name="action_settings">Settings</string>
+
     <string name="channel_name">effe18_channel</string>
     <string name="channel_description">effe18_channel_description</string>
 </resources>

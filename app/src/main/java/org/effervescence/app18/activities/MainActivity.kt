@@ -1,7 +1,9 @@
 package org.effervescence.app18.activities
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.support.v4.app.Fragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main_contents.*
@@ -9,7 +11,6 @@ import nl.psdcompany.duonavigationdrawer.views.DuoMenuView
 import nl.psdcompany.duonavigationdrawer.widgets.DuoDrawerToggle
 import org.effervescence.app18.R
 import org.effervescence.app18.adapters.MainMenuAdapter
-import org.effervescence.app18.fragments.EventsFragment
 import org.effervescence.app18.fragments.InfoFragment
 import org.effervescence.app18.fragments.UpdatesFragment
 import org.jetbrains.anko.toast
@@ -38,12 +39,21 @@ class MainActivity : AppCompatActivity() {
 
         main_menu.setOnMenuClickListener(object : DuoMenuView.OnMenuClickListener {
             override fun onOptionClicked(position: Int, objectClicked: Any?) {
-                title = mTitles[position]
-                mMenuAdapter.setSelectedView(position)
+                if(position != 1){
+                    title = mTitles[position]
+                    mMenuAdapter.setSelectedView(position)
+
+                }
 
                 when (position) {
                     0 -> toast("Home Fragment")
-                    1 -> goToFragment(EventsFragment(), false)
+                    1 -> {
+                        Handler().postDelayed({
+                            val intent = Intent(this@MainActivity, EventsActivity::class.java)
+                            startActivity(intent)
+                        }, 300)
+
+                    }
                     2 -> toast("ProShows Fragment")
                     3 -> goToFragment(UpdatesFragment(), false)
                     4 -> goToFragment(InfoFragment(), false)
