@@ -49,6 +49,7 @@ class SponsorAdapter(val context: Context, private val itemClick : (Sponsor) -> 
             itemView.setOnClickListener {
                 val builder = CustomTabsIntent.Builder()
                 val customTabsIntent = builder.build()
+
                 if(sponsor.website.isNotEmpty()) {
                     try {
                         customTabsIntent.launchUrl(context, Uri.parse(sponsor.website))
@@ -56,6 +57,9 @@ class SponsorAdapter(val context: Context, private val itemClick : (Sponsor) -> 
                         Toast.makeText(context, "Unable to open web page", Toast.LENGTH_SHORT).show()
                     }
                 }
+
+                if(sponsor.website.isNotEmpty())
+                    customTabsIntent.launchUrl(context, Uri.parse(sponsor.website))
             }
         }
     }

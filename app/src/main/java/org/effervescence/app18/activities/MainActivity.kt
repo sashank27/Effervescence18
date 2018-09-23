@@ -47,10 +47,10 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 when (position) {
-                    0 -> goToFragment(HomeFragment(), false)
+                    0 -> toast("Home Fragment")
                     1 -> {
-                        val intent = Intent(this@MainActivity, EventsActivity::class.java)
                         Handler().postDelayed({
+                            val intent = Intent(this@MainActivity, EventsActivity::class.java)
                             startActivity(intent)
                         }, 300)
 
