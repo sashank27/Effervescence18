@@ -25,8 +25,7 @@ data class Event(
             parcel.createStringArrayList(),
             parcel.createStringArrayList(),
             parcel.readString(),
-            parcel.createTypedArrayList(Organizer)) {
-    }
+            parcel.createTypedArrayList(Organizer))
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeLong(id)

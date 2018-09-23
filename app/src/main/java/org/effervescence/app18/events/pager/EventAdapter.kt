@@ -19,8 +19,8 @@ import org.effervescence.app18.models.Event
 import java.text.SimpleDateFormat
 import java.util.*
 
-class EventAdapter(val context: Context, private val itemClick : (Event) -> Unit) :
-        RecyclerView.Adapter<EventAdapter.EventViewHolder>(){
+class EventAdapter(val context: Context, private val itemClick: (Event) -> Unit) :
+        RecyclerView.Adapter<EventAdapter.EventViewHolder>() {
 
     private var EventList = ArrayList<Event>()
     private var placeholder = ContextCompat.getDrawable(context, R.drawable.placeholder_event)
@@ -36,23 +36,24 @@ class EventAdapter(val context: Context, private val itemClick : (Event) -> Unit
     }
 
 
-    fun swapList(newList : List<Event>){
+    fun swapList(newList: List<Event>) {
         EventList.clear()
         EventList.addAll(newList)
         notifyDataSetChanged()
     }
-    inner class EventViewHolder(itemView: View, private val itemClick: (Event) -> Unit) : RecyclerView.ViewHolder(itemView){
+
+    inner class EventViewHolder(itemView: View, private val itemClick: (Event) -> Unit) : RecyclerView.ViewHolder(itemView) {
         private val EventImageView = itemView.findViewById<ImageView>(R.id.eventImage)
         private val EventNameView = itemView.findViewById<TextView>(R.id.eventNameTextView)
         private val EventTimeView = itemView.findViewById<TextView>(R.id.eventTimeTextView)
         private val EventDayView = itemView.findViewById<TextView>(R.id.eventDayTextView)
         private val EventLocationTextView = itemView.findViewById<TextView>(R.id.eventLocation)
 
-        fun bind(context : Context, event: Event){
+        fun bind(context: Context, event: Event) {
             EventNameView.text = event.name
             EventLocationTextView.text = event.location
 
-            if(event.timestamp < 100L){
+            if (event.timestamp < 100L) {
                 EventLocationTextView.text = "Online"
                 EventTimeView.visibility = View.INVISIBLE
                 EventDayView.visibility = View.INVISIBLE
@@ -73,10 +74,12 @@ class EventAdapter(val context: Context, private val itemClick : (Event) -> Unit
 
             Glide.with(context).load(event.imageUrl).into(EventImageView)
 
-            itemView.setOnClickListener { val intent = Intent(context, EventDetailActivity::class.java)
+            itemView.setOnClickListener {
+                val intent = Intent(context, EventDetailActivity::class.java)
                 val optionsCompat = ActivityOptions.makeSceneTransitionAnimation(context as Activity)
-            intent.putExtra("event", event)
-            startActivity(context, intent, optionsCompat.toBundle())}
+                intent.putExtra("event", event)
+                startActivity(context, intent, optionsCompat.toBundle())
+            }
         }
     }
 }

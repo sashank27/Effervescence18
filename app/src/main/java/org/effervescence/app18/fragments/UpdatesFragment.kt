@@ -37,18 +37,10 @@ class UpdatesFragment : Fragment() {
 
         updates_RV_swipe.setOnRefreshListener { updateRecyclerView() }
         appDB = AppDB.getInstance(context!!)
-        adapter = UpdatesAdapter(context!!)
-        buildRecyclerView()
-    }
+        adapter = UpdatesAdapter(context!!) {
 
-    private fun updateRecyclerView() {
-        doAsync {
-            updatesList = getAllUpdates()
-            uiThread {
-                adapter.setList(updatesList)
-                updates_RV_swipe.isRefreshing = false
-            }
         }
+        buildRecyclerView()
     }
 
     private fun buildRecyclerView() {
@@ -80,6 +72,7 @@ class UpdatesFragment : Fragment() {
                 val currentKey = keys.next()
                 val currentUpdate = responseBody.getJSONObject(currentKey)
                 updatesList.add(Update(currentKey,
+                        currentUpdate.optLong("eventID"),
                         currentUpdate.optString("title"),
                         currentUpdate.optString("description"),
                         currentUpdate.optLong("timestamp")))
@@ -88,5 +81,15 @@ class UpdatesFragment : Fragment() {
             Toast.makeText(context, "Connection broke", Toast.LENGTH_SHORT).show()
         }
         return updatesList
+    }
+
+    private fun updateRecyclerView() {
+        doAsync {
+            updatesList = getAllUpdates()
+            uiThread {
+                adapter.setList(updatesList)
+                updates_RV_swipe.isRefreshing = false
+            }
+        }
     }
 }
