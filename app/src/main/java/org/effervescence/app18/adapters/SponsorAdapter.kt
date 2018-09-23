@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import org.effervescence.app18.R
 import org.effervescence.app18.models.Sponsor
@@ -48,8 +49,13 @@ class SponsorAdapter(val context: Context, private val itemClick : (Sponsor) -> 
             itemView.setOnClickListener {
                 val builder = CustomTabsIntent.Builder()
                 val customTabsIntent = builder.build()
-                if(sponsor.website.isNotEmpty())
-                    customTabsIntent.launchUrl(context, Uri.parse(sponsor.website))
+                if(sponsor.website.isNotEmpty()) {
+                    try {
+                        customTabsIntent.launchUrl(context, Uri.parse(sponsor.website))
+                    } catch (e: Exception) {
+                        Toast.makeText(context, "Unable to open web page", Toast.LENGTH_SHORT).show()
+                    }
+                }
             }
         }
     }
