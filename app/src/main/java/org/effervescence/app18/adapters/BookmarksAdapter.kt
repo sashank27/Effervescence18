@@ -68,6 +68,7 @@ class BookmarksAdapter(val context: Context) : RecyclerView.Adapter<BookmarksAda
             sdf.timeZone = TimeZone.getTimeZone("Asia/India")
 
             timeView.text = sdf.format(calendar.time)
+
             locationView.text = event.location
 
 
