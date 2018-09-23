@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import android.net.ConnectivityManager
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.squareup.moshi.Moshi
 import kotlinx.android.synthetic.main.activity_splash.*
 import okhttp3.OkHttpClient
@@ -19,11 +20,13 @@ import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.*
 import org.json.JSONObject
+import java.sql.Timestamp
+
 
 class SplashActivity : AppCompatActivity(), AnkoLogger {
 
     private lateinit var sharedPrefs: SharedPreferences
-
+    private var time = 0L
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
@@ -34,9 +37,20 @@ class SplashActivity : AppCompatActivity(), AnkoLogger {
         animationView.playAnimation()
         animationView.loop(true)
 
+        time = System.currentTimeMillis()
+        val lastTime = sharedPrefs.getLong("lastupdated", 0)
+        Log.e("Skip", "$time and $lastTime")
         when {
             isNetworkConnectionAvailable() -> {
-                fetchLatestData()
+                if((time - lastTime) > 172800000){
+                    fetchLatestData()
+                    sharedPrefs.edit().putLong("lastupdated",time).commit()
+                }else{
+                    Log.e("Skip", "Skipping")
+                    startActivity<MainActivity>()
+                    finish()
+                }
+
             }
             !sharedPrefs.getBoolean("firstrun", true) -> {
                 showFinishedAnimation()
