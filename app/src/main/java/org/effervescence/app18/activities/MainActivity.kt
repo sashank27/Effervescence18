@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var mTitles: ArrayList<String>
     private lateinit var mMenuAdapter: MainMenuAdapter
+    private var currentPage = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,20 +47,35 @@ class MainActivity : AppCompatActivity() {
 
                 }
 
-                when (position) {
-                    0 -> toast("Home Fragment")
-                    1 -> {
-                        Handler().postDelayed({
-                            val intent = Intent(this@MainActivity, EventsActivity::class.java)
-                            startActivity(intent)
-                        }, 300)
+                if(currentPage != position){
+                    when (position) {
+                        0 -> {
+                            currentPage = 0
+                            goToFragment(HomeFragment(), false)
+                        }
+                        1 -> {
+                            Handler().postDelayed({
+                                val intent = Intent(this@MainActivity, EventsActivity::class.java)
+                                startActivity(intent)
+                            }, 300)
 
+                        }
+                        2 -> {
+                            toast("ProShows Fragment")
+
+                        }
+                        3 -> {
+                            goToFragment(UpdatesFragment(), false)
+                            currentPage = 3
+                        }
+                        4 -> {
+                            goToFragment(InfoFragment(), false)
+                            currentPage = 4
+                        }
+                        else -> toast("Home Fragment")
                     }
-                    2 -> toast("ProShows Fragment")
-                    3 -> goToFragment(UpdatesFragment(), false)
-                    4 -> goToFragment(InfoFragment(), false)
-                    else -> toast("Home Fragment")
                 }
+
                 main_drawer_layout.closeDrawer()
             }
 
