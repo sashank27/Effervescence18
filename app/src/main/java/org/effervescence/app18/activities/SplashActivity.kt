@@ -1,11 +1,19 @@
 package org.effervescence.app18.activities
 
+import android.animation.Animator
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.app.AlertDialog
 import android.content.Context
 import android.content.SharedPreferences
 import android.net.ConnectivityManager
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationSet
+import android.view.animation.TranslateAnimation
 import com.squareup.moshi.Moshi
 import kotlinx.android.synthetic.main.activity_splash.*
 import okhttp3.OkHttpClient
@@ -19,33 +27,69 @@ import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.*
 import org.json.JSONObject
+import java.sql.Timestamp
+
 
 class SplashActivity : AppCompatActivity(), AnkoLogger {
 
     private lateinit var sharedPrefs: SharedPreferences
-
+    private var time = 0L
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
         sharedPrefs = getSharedPreferences("AppPrefs", Context.MODE_PRIVATE)
 
-        animationView.setAnimation("loading_spinner.json")
-        animationView.playAnimation()
-        animationView.loop(true)
+        startLogoAnimation()
+//        animationView.setAnimation("loading_spinner_white.json")
+//        animationView.playAnimation()
+//        animationView.loop(true)
 
+        time = System.currentTimeMillis()
+        val lastTime = sharedPrefs.getLong("lastupdated", 0)
+        Log.e("Skip", "$time and $lastTime")
         when {
             isNetworkConnectionAvailable() -> {
-                fetchLatestData()
+                if((time - lastTime) > 0){
+                    fetchLatestData()
+                    sharedPrefs.edit().putLong("lastupdated",time).commit()
+                }else{
+                    Log.e("Skip", "Skipping")
+                    startActivity<MainActivity>()
+                    finish()
+                }
+
             }
             !sharedPrefs.getBoolean("firstrun", true) -> {
-                showFinishedAnimation()
+//                showFinishedAnimation()
             }
             else -> {
-                animationView.cancelAnimation()
+//                animationView.cancelAnimation()
                 showAlert()
             }
         }
+    }
+
+    private fun startLogoAnimation() {
+        val yTranslationDown = ObjectAnimator.ofFloat(effeLogoIV, "translationY", 150f)
+        val yTranslationUp = ObjectAnimator.ofFloat(effeLogoIV, "translationY", -130f)
+        val yTranslationDownToStart = ObjectAnimator.ofFloat(effeLogoIV, "translationY", 0f)
+
+        yTranslationDown.duration = 1500
+        yTranslationUp.duration = 3000
+        yTranslationUp.startDelay = 1500
+        yTranslationDownToStart.duration = 1500
+        yTranslationDownToStart.startDelay = 4500
+
+        val animatorSet = AnimatorSet()
+        animatorSet.playTogether(yTranslationDown, yTranslationUp, yTranslationDownToStart)
+        animatorSet.addListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationEnd(animation: Animator) {
+//                super.onAnimationEnd(animation)
+                animatorSet.start()
+            }
+        })
+        animatorSet.start()
     }
 
     private fun fetchLatestData() {
@@ -164,7 +208,6 @@ class SplashActivity : AppCompatActivity(), AnkoLogger {
         }
     }
 
-
     private fun showAlert() {
         val builder = AlertDialog.Builder(this)
         builder.setTitle("No internet Connection")
@@ -175,6 +218,7 @@ class SplashActivity : AppCompatActivity(), AnkoLogger {
     }
 
     private fun showFinishedAnimation() {
+        spin_kit.visibility = View.GONE
         animationView.setAnimation("checked_done.json")
         animationView.loop(false)
         animationView.playAnimation()

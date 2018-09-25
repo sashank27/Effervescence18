@@ -11,6 +11,7 @@ import nl.psdcompany.duonavigationdrawer.views.DuoMenuView
 import nl.psdcompany.duonavigationdrawer.widgets.DuoDrawerToggle
 import org.effervescence.app18.R
 import org.effervescence.app18.adapters.MainMenuAdapter
+import org.effervescence.app18.fragments.HomeFragment
 import org.effervescence.app18.fragments.InfoFragment
 import org.effervescence.app18.fragments.UpdatesFragment
 import org.jetbrains.anko.toast
@@ -27,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar_main)
         mTitles = ArrayList(Arrays.asList(*resources.getStringArray(R.array.menu_items_array)))
-
+        goToFragment(HomeFragment(), false)
         initializeDrawer()
         handleDrawerMenu()
     }
@@ -42,11 +43,10 @@ class MainActivity : AppCompatActivity() {
                 if(position != 1){
                     title = mTitles[position]
                     mMenuAdapter.setSelectedView(position)
-
                 }
 
                 when (position) {
-                    0 -> toast("Home Fragment")
+                    0 -> goToFragment(HomeFragment(), false)
                     1 -> {
                         Handler().postDelayed({
                             val intent = Intent(this@MainActivity, EventsActivity::class.java)
@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
                     2 -> toast("ProShows Fragment")
                     3 -> goToFragment(UpdatesFragment(), false)
                     4 -> goToFragment(InfoFragment(), false)
-                    else -> toast("Home Fragment")
+                    else -> goToFragment(HomeFragment(), false)
                 }
                 main_drawer_layout.closeDrawer()
             }
@@ -83,7 +83,6 @@ class MainActivity : AppCompatActivity() {
 
         transaction.replace(R.id.main_container, fragment).commit()
     }
-
 
     private fun initializeDrawer() {
 

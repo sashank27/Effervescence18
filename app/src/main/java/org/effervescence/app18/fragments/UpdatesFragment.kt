@@ -3,27 +3,26 @@ package org.effervescence.app18.fragments
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import com.androidnetworking.AndroidNetworking
+import com.androidnetworking.error.ANError
+import com.androidnetworking.interfaces.JSONObjectRequestListener
 import kotlinx.android.synthetic.main.fragment_updates.*
 import okhttp3.OkHttpClient
-import okhttp3.Request
-
 import org.effervescence.app18.R
 import org.effervescence.app18.adapters.UpdatesAdapter
 import org.effervescence.app18.models.Update
 import org.effervescence.app18.utils.AppDB
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
 import org.json.JSONObject
+
 
 class UpdatesFragment : Fragment() {
 
-    private lateinit var adapter: UpdatesAdapter
-    private var updatesList = ArrayList<Update>()
+    private var mUpdatesList = ArrayList<Update>()
+    private lateinit var mUpdatesAdapter: UpdatesAdapter
+    private lateinit var mClient: OkHttpClient
     private lateinit var appDB: AppDB
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -34,62 +33,57 @@ class UpdatesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        mClient = OkHttpClient()
 
         updates_RV_swipe.setOnRefreshListener { updateRecyclerView() }
         appDB = AppDB.getInstance(context!!)
-        adapter = UpdatesAdapter(context!!) {
-
+        mUpdatesAdapter = UpdatesAdapter(context!!) {
         }
         buildRecyclerView()
     }
 
     private fun buildRecyclerView() {
         updates_RV_swipe.isRefreshing = true
+        updates_RV.adapter = mUpdatesAdapter
         updates_RV.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        doAsync {
-            updatesList = getAllUpdates()
-            uiThread {
-                adapter.setList(updatesList)
-                updates_RV.adapter = adapter
-                updates_RV_swipe.isRefreshing = false
-            }
-        }
+        mUpdatesList = getAllUpdatesAndUpdateList()
     }
 
-    private fun getAllUpdates(): ArrayList<Update> {
-        val client = OkHttpClient()
-        val request = Request.Builder()
-                .url("https://effervescence18-6e63f.firebaseio.com/updates.json")
+    private fun getAllUpdatesAndUpdateList(): ArrayList<Update> {
+        AndroidNetworking.get("https://effervescence18-6e63f.firebaseio.com/updates.json")
+                .setTag("getUpdatesRequest")
                 .build()
-        val response = client.newCall(request).execute()
-
-        val updatesList = ArrayList<Update>()
-        if (response.isSuccessful) {
-            val responseBody = JSONObject(response.body()?.string())
-            val keys = responseBody.keys()
-
-            while (keys.hasNext()) {
-                val currentKey = keys.next()
-                val currentUpdate = responseBody.getJSONObject(currentKey)
-                updatesList.add(Update(currentKey,
-                        currentUpdate.optLong("eventID"),
-                        currentUpdate.optString("title"),
-                        currentUpdate.optString("description"),
-                        currentUpdate.optLong("timestamp")))
-            }
-        } else {
-            Toast.makeText(context, "Connection broke", Toast.LENGTH_SHORT).show()
-        }
-        return updatesList
+                .getAsJSONObject(object : JSONObjectRequestListener {
+                    override fun onResponse(response: JSONObject?) {
+                        if (response != null) {
+                            mUpdatesList.clear()
+                            val keys = response.keys()
+                            while (keys.hasNext()) {
+                                val currentKey = keys.next()
+                                val currentUpdate = response.getJSONObject(currentKey)
+                                mUpdatesList.add(Update(currentKey,
+                                        currentUpdate.optLong("eventID"),
+                                        currentUpdate.optString("title"),
+                                        currentUpdate.optString("description"),
+                                        currentUpdate.optLong("timestamp")))
+                            }
+                            mUpdatesAdapter.setList(mUpdatesList)
+                            updates_RV_swipe.isRefreshing = false
+                        } else { /*Show empty list image */ }
+                    }
+                    override fun onError(anError: ANError?) {
+                        //Show connectivity problem text
+                    }
+                })
+        return mUpdatesList
     }
 
     private fun updateRecyclerView() {
-        doAsync {
-            updatesList = getAllUpdates()
-            uiThread {
-                adapter.setList(updatesList)
-                updates_RV_swipe.isRefreshing = false
-            }
-        }
+        mUpdatesList = getAllUpdatesAndUpdateList()
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        AndroidNetworking.cancel("getUpdatesRequest")
     }
 }
