@@ -50,7 +50,7 @@ class SplashActivity : AppCompatActivity(), AnkoLogger {
         Log.e("Skip", "$time and $lastTime")
         when {
             isNetworkConnectionAvailable() -> {
-                if((time - lastTime) > 0){
+                if((time - lastTime) > 172800000){
                     fetchLatestData()
                     sharedPrefs.edit().putLong("lastupdated",time).commit()
                 }else{
