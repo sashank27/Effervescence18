@@ -8,11 +8,12 @@ import com.bumptech.glide.Glide
 import com.ramotion.navigationtoolbar.HeaderLayout
 import org.effervescence.app18.R
 import org.jetbrains.anko.find
+import org.w3c.dom.Text
 
 class HeaderItem(view: View) : HeaderLayout.ViewHolder(view) {
     private val gradient = view.findViewById<View>(R.id.gradient)
     private val background = view.findViewById<ImageView>(R.id.image)
-
+    private val headerTitle = view.findViewById<TextView>(R.id.heading)
 
     internal val backgroundLayout = view.findViewById<View>(R.id.backgroud_layout)
 
@@ -32,9 +33,10 @@ class HeaderItem(view: View) : HeaderLayout.ViewHolder(view) {
 
         overlayTitle = title?.also {
             it.tag = position
-            it.text = headerTitles[position]
+            it.text = ""
             it.visibility = View.VISIBLE
         }
+        headerTitle.text = headerTitles[position]
 
         overlayLine = line
         overlayLine?.also {

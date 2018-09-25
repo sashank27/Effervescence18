@@ -5,11 +5,19 @@
     android:layout_height="match_parent"
     android:elevation="2dp">
 
-    <FrameLayout
+    <RelativeLayout
         android:id="@+id/backgroud_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <TextView
+            android:id="@+id/heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hello"
+            android:layout_centerInParent="true"
+            style="@style/HeaderItemTextStyle"
+            android:translationZ="5dp" />
         <View
             android:id="@+id/gradient"
             android:layout_width="match_parent"
@@ -23,6 +31,6 @@
             android:scaleType="centerCrop"
             android:contentDescription="@string/cd_header_item_background" />
 
-    </FrameLayout>
+    </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>
