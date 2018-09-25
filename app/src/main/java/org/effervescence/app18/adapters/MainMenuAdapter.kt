@@ -24,7 +24,7 @@ class MainMenuAdapter(private val mOptions: ArrayList<String>): BaseAdapter() {
             convertView as DuoOptionView
         }
 
-        optionView.bind(mOptions[position])
+        optionView.bind(mOptions[position], null, null)
         mOptionViews.add(optionView)
 
         return optionView
