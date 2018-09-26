@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import org.effervescence.app18.R
 import org.effervescence.app18.models.Sponsor
 
@@ -18,6 +19,7 @@ class SponsorAdapter(val context: Context, private val itemClick : (Sponsor) -> 
         RecyclerView.Adapter<SponsorAdapter.SponsorViewHolder>(){
 
     private var developerList = ArrayList<Sponsor>()
+    val requestOption = RequestOptions().placeholder(R.drawable.placeholder_event)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SponsorViewHolder {
         val itemView = LayoutInflater.from(context).inflate(R.layout.individual_sponsor_view, parent, false)
@@ -44,7 +46,7 @@ class SponsorAdapter(val context: Context, private val itemClick : (Sponsor) -> 
         fun bind(context : Context, sponsor: Sponsor) {
             sponsorNameView.text = sponsor.name
             sponsorTypeView.text = sponsor.categories.joinToString(", ")
-            Glide.with(sponsorImageView).load(sponsor.imageUrl).into(sponsorImageView)
+            Glide.with(sponsorImageView).load(sponsor.imageUrl).apply(requestOption).into(sponsorImageView)
 
             itemView.setOnClickListener {
                 val builder = CustomTabsIntent.Builder()
