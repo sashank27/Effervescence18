@@ -41,13 +41,13 @@ class MainActivity : AppCompatActivity() {
 
         main_menu.setOnMenuClickListener(object : DuoMenuView.OnMenuClickListener {
             override fun onOptionClicked(position: Int, objectClicked: Any?) {
-                if(position != 1){
+                if (position != 1) {
                     title = mTitles[position]
                     mMenuAdapter.setSelectedView(position)
 
                 }
 
-                if(currentPage != position){
+                if (currentPage != position) {
                     when (position) {
                         0 -> {
                             currentPage = 0
