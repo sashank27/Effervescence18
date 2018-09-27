@@ -118,7 +118,7 @@ class SplashActivity : AppCompatActivity(), AnkoLogger {
                 }
 
                 val request2 = Request.Builder()
-                        .url("https://effervescence-iiita.github.io/Effervescence17/data/sponsors.json")
+                        .url("https://effervescence-iiita.github.io/Effervescence18/data/sponsors.json")
                         .build()
                 val response2 = client.newCall(request2).execute()
                 if (response2.isSuccessful) {
@@ -131,7 +131,7 @@ class SplashActivity : AppCompatActivity(), AnkoLogger {
                 }
 
                 val request3 = Request.Builder()
-                        .url("https://effervescence-iiita.github.io/Effervescence17/data/team.json")
+                        .url("https://effervescence-iiita.github.io/Effervescence18/data/team.json")
                         .build()
                 val response3 = client.newCall(request3).execute()
 
@@ -146,7 +146,7 @@ class SplashActivity : AppCompatActivity(), AnkoLogger {
                 }
 
                 val request4 = Request.Builder()
-                        .url("https://effervescence-iiita.github.io/Effervescence17/data/developer.json")
+                        .url("https://effervescence-iiita.github.io/Effervescence18/data/developer.json")
                         .build()
                 val response4 = client.newCall(request4).execute()
 
