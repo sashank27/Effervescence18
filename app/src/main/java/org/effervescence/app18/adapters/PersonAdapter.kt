@@ -14,9 +14,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import org.effervescence.app18.R
 import org.effervescence.app18.models.Person
 
@@ -28,7 +30,7 @@ class PersonAdapter(val context: Context, private val itemClick : (Person) -> Un
         private const val TYPE_PERSON = 1
     }
     private var personList = ArrayList<Person>()
-
+    val requestOption = RequestOptions().placeholder(R.drawable.placeholder_event)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PersonViewHolder {
         val itemView = if(viewType == TYPE_PERSON)
             LayoutInflater.from(context).inflate(R.layout.individual_person_view, parent, false)
@@ -59,14 +61,14 @@ class PersonAdapter(val context: Context, private val itemClick : (Person) -> Un
         private val personImageView = itemView.findViewById<ImageView>(R.id.eventImage)
         private val personNameView = itemView.findViewById<TextView>(R.id.eventNameTextView)
         private val personDesignationView = itemView.findViewById<TextView>(R.id.personDesignationTextView)
-
+        private val callButton = itemView.findViewById<ImageView>(R.id.imageView)
         fun bind(context : Context, person: Person){
             personNameView.text = person.name
             personDesignationView.text = person.position
 
-            Glide.with(personImageView).load(person.imageUrl).into(personImageView)
+            Glide.with(personImageView).load(person.imageUrl).apply(requestOption).into(personImageView)
 
-            itemView.setOnClickListener {
+            callButton.setOnClickListener {
                 val callNumber = person.contact
                 if (ContextCompat.checkSelfPermission(context,
                                 Manifest.permission.CALL_PHONE)

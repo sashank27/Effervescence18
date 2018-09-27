@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import org.effervescence.app18.R
 import org.effervescence.app18.models.Developer
 
@@ -18,6 +19,7 @@ class DeveloperAdapter(val context: Context, private val itemClick : (Developer)
         RecyclerView.Adapter<DeveloperAdapter.DeveloperViewHolder>(){
 
     private var developerList = ArrayList<Developer>()
+    val requestOption = RequestOptions().placeholder(R.drawable.placeholder_event)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeveloperViewHolder {
         val itemView = LayoutInflater.from(context).inflate(R.layout.individual_developer_view, parent, false)
@@ -45,7 +47,7 @@ class DeveloperAdapter(val context: Context, private val itemClick : (Developer)
             DeveloperNameView.text = Developer.name
             DeveloperDesignationView.text = Developer.position
 
-            Glide.with(DeveloperImageView).load(Developer.imageUrl).into(DeveloperImageView)
+            Glide.with(DeveloperImageView).load(Developer.imageUrl).apply(requestOption).into(DeveloperImageView)
 
             itemView.setOnClickListener {
                 openChromeTab(context,Developer.gitHubLink)

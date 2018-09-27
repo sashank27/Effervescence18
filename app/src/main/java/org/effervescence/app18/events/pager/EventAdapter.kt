@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import org.effervescence.app18.R
 import org.effervescence.app18.activities.EventDetailActivity
 import org.effervescence.app18.models.Event
@@ -23,7 +24,8 @@ class EventAdapter(val context: Context, private val itemClick: (Event) -> Unit)
         RecyclerView.Adapter<EventAdapter.EventViewHolder>() {
 
     private var EventList = ArrayList<Event>()
-    private var placeholder = ContextCompat.getDrawable(context, R.drawable.placeholder_event)
+
+    val requestOption = RequestOptions().placeholder(R.drawable.placeholder_event)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {
         val itemView = LayoutInflater.from(context).inflate(R.layout.list_item_event, parent, false)
         return EventViewHolder(itemView, itemClick)
@@ -72,7 +74,7 @@ class EventAdapter(val context: Context, private val itemClick: (Event) -> Unit)
             sdf.applyPattern("MMMM d, yyyy")
             EventDayView.text = sdf.format(calendar.time)
 
-            Glide.with(context).load(event.imageUrl).into(EventImageView)
+            Glide.with(context).load(event.imageUrl).apply(requestOption).into(EventImageView)
 
             itemView.setOnClickListener {
                 val intent = Intent(context, EventDetailActivity::class.java)

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".activities.EventDetailActivity"
-    >
+    android:background="@color/gray_shade_0">
 
     <LinearLayout
         android:id="@+id/eventContentScrollView"
@@ -30,10 +30,10 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:fontFamily="sans-serif-condensed"
+                android:fontFamily="@font/autour_one"
                 android:text="TextView"
                 android:textColor="@color/gray_shade_9"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@+id/dateImage"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/dateImage"
@@ -69,10 +69,10 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:fontFamily="sans-serif-condensed"
+                android:fontFamily="@font/autour_one"
                 android:text="TextView"
                 android:textColor="@color/gray_shade_9"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@+id/mapImage"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/mapImage"
@@ -97,8 +97,8 @@
                 android:layout_marginTop="8dp"
                 android:text="TextView"
                 android:textColor="@color/gray_shade_9"
-                android:fontFamily="sans-serif-condensed"
-                android:textSize="18sp"
+                android:fontFamily="@font/autour_one"
+                android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@+id/clockImage"
                 app:layout_constraintStart_toEndOf="@+id/clockImage"
                 app:layout_constraintTop_toTopOf="@+id/clockImage" />
@@ -121,7 +121,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:text="TextView"
-
+                    android:fontFamily="@font/delius"
                     android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

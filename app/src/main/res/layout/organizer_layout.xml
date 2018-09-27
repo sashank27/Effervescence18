@@ -18,6 +18,7 @@
         android:layout_marginTop="8dp"
         android:text="TextView"
         android:textColor="@color/gray_shade_9"
+        android:fontFamily="@font/delius"
         android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/callButton"
         app:layout_constraintStart_toStartOf="parent"
