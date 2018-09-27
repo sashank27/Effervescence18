@@ -52,6 +52,6 @@ class AppDB private constructor(context: Context) {
 
     fun storeDevelopers(developers: List<Developer>) = developers.forEach { developerHash.put(it.id, it) }
 
-    fun storeUpdates(updates: ArrayList<Update>) = updates.forEach { updatesHash.put(it.id, it) }
+    fun storeUpdates(updates: ArrayList<Update>) = updates.forEach { updatesHash.put(it.eventID, it) }
 
 }
