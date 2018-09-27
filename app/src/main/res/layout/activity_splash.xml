@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg4_effe_cropped"
+    android:background="@drawable/background_splash"
     tools:context="org.effervescence.app18.activities.SplashActivity">
 
     <ImageView

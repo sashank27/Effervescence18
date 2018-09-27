@@ -14,6 +14,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
@@ -60,14 +61,14 @@ class PersonAdapter(val context: Context, private val itemClick : (Person) -> Un
         private val personImageView = itemView.findViewById<ImageView>(R.id.eventImage)
         private val personNameView = itemView.findViewById<TextView>(R.id.eventNameTextView)
         private val personDesignationView = itemView.findViewById<TextView>(R.id.personDesignationTextView)
-
+        private val callButton = itemView.findViewById<ImageView>(R.id.imageView)
         fun bind(context : Context, person: Person){
             personNameView.text = person.name
             personDesignationView.text = person.position
 
             Glide.with(personImageView).load(person.imageUrl).apply(requestOption).into(personImageView)
 
-            itemView.setOnClickListener {
+            callButton.setOnClickListener {
                 val callNumber = person.contact
                 if (ContextCompat.checkSelfPermission(context,
                                 Manifest.permission.CALL_PHONE)
