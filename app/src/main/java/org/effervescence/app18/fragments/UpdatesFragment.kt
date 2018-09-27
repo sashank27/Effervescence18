@@ -57,15 +57,24 @@ class UpdatesFragment : Fragment() {
                     override fun onResponse(response: JSONObject?) {
                         if (response != null) {
                             mUpdatesList.clear()
+
                             val keys = response.keys()
                             while (keys.hasNext()) {
                                 val currentKey = keys.next()
-                                val currentUpdate = response.getJSONObject(currentKey)
-                                mUpdatesList.add(Update(currentKey,
-                                        currentUpdate.optLong("eventID"),
-                                        currentUpdate.optString("title"),
-                                        currentUpdate.optString("description"),
-                                        currentUpdate.optLong("timestamp")))
+                                val childObj = response.getJSONObject(currentKey)
+                                if (childObj != null) {
+                                    val newNotification = Update(
+                                            description = childObj.getString("description"),
+                                            senderName = childObj.getString("senderName"),
+                                            senderEmail = childObj.getString("senderEmail"),
+                                            timestamp = childObj.getLong("timestamp"),
+                                            title = childObj.getString("title"),
+                                            eventID = childObj.getLong("eventID"),
+                                            verified = childObj.getBoolean("verified")
+                                    )
+
+                                    if (newNotification.verified) mUpdatesList.add(newNotification)
+                                }
                             }
                             mUpdatesAdapter.setList(mUpdatesList)
                             updates_RV_swipe.isRefreshing = false
