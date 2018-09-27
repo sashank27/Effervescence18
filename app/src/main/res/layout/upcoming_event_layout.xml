@@ -21,6 +21,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
         android:textSize="16sp"
         android:textStyle="bold"
+        android:fontFamily="@font/product_sans_regular"
         tools:text="Event Name" />
 
     <TextView
@@ -29,6 +30,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="EventTime"
+        android:fontFamily="@font/product_sans_regular"
         android:textSize="14sp" />
 
 </LinearLayout>
