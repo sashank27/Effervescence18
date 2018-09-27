@@ -64,7 +64,7 @@ class BookmarksAdapter(val context: Context) : RecyclerView.Adapter<BookmarksAda
             val calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/India"))
             calendar.timeInMillis = event.timestamp.times(1000L)
 
-            val sdf = SimpleDateFormat("hh:mm a  MMMM d, yyyy")
+            val sdf = SimpleDateFormat("hh:mm a")
             sdf.timeZone = TimeZone.getTimeZone("Asia/India")
 
             timeView.text = sdf.format(calendar.time)
@@ -74,29 +74,26 @@ class BookmarksAdapter(val context: Context) : RecyclerView.Adapter<BookmarksAda
 
             if(event.timestamp < 100L){
                 locationView.text = "Online"
-                timeView.visibility = View.GONE
+                timeView.text = ""
             }else{
                 timeView.visibility = View.VISIBLE
             }
-            itemView.setOnClickListener({
+            itemView.setOnClickListener {
                 val intent = Intent(context, EventDetailActivity::class.java)
                 val optionsCompat = ActivityOptions.makeSceneTransitionAnimation(context as Activity)
                 intent.putExtra("event", event)
                 ContextCompat.startActivity(context, intent, optionsCompat.toBundle())
-            })
+            }
 
             Glide.with(context)
                     .load(event.imageUrl)
                     .into(itemView.eventImageView)
 
-
-
-            itemView.cancelBookmark.setOnClickListener ({
+            itemView.cancelBookmark.setOnClickListener {
                 val appDB = AppDB.getInstance(context)
                 adapter.deleteEvent(event, position)
                 appDB.removeBookmark(event.id)
-                context.toast("Bookmark removed.")
-            })
+            }
         }
     }
 }

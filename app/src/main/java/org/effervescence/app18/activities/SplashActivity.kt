@@ -40,7 +40,7 @@ class SplashActivity : AppCompatActivity(), AnkoLogger {
 
         sharedPrefs = getSharedPreferences("AppPrefs", Context.MODE_PRIVATE)
 
-        //startLogoAnimation()
+        startLogoAnimation()
 //        animationView.setAnimation("loading_spinner_white.json")
 //        animationView.playAnimation()
 //        animationView.loop(true)
@@ -50,9 +50,9 @@ class SplashActivity : AppCompatActivity(), AnkoLogger {
         Log.e("Skip", "$time and $lastTime")
         when {
             isNetworkConnectionAvailable() -> {
-                if((time - lastTime) > 17280){
+                if((time - lastTime) > 0){
                     fetchLatestData()
-                    sharedPrefs.edit().putLong("lastupdated",time).commit()
+                    sharedPrefs.edit().putLong("lastupdated",time).apply()
                 }else{
                     Log.e("Skip", "Skipping")
                     startActivity<MainActivity>()

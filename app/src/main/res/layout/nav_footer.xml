@@ -4,6 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <ImageView
+        android:src="@drawable/ic_effe_logo_white"
+        android:layout_width="300dp"
+        android:layout_height="100dp" />
+
     <TextView
         android:id="@+id/nav_footer_text"
         android:layout_width="wrap_content"
