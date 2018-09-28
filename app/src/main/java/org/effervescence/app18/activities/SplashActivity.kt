@@ -17,13 +17,11 @@ import kotlinx.android.synthetic.main.activity_splash.*
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.effervescence.app18.R
-import org.effervescence.app18.models.Developer
-import org.effervescence.app18.models.Event
-import org.effervescence.app18.models.Person
-import org.effervescence.app18.models.Sponsor
+import org.effervescence.app18.models.*
 import org.effervescence.app18.utils.AnimatorListenerAdapter
 import org.effervescence.app18.utils.AppDB
 import org.jetbrains.anko.*
+import org.json.JSONObject
 
 
 class SplashActivity : AppCompatActivity(), AnkoLogger {
@@ -169,13 +167,21 @@ class SplashActivity : AppCompatActivity(), AnkoLogger {
 
                     while (keys.hasNext()) {
                         val currentKey = keys.next()
-                        val currentUpdate = responseBody.getJSONObject(currentKey)
-                        updatesList.add(Update(currentKey,
-                                currentUpdate.optString("title"),
-                                currentUpdate.optString("description"),
-                                currentUpdate.optLong("timestamp")))
+                        val childObj = responseBody.getJSONObject(currentKey)
+                        if (childObj != null) {
+                            val newNotification = Update(
+                                    description = childObj.getString("description"),
+                                    senderName = childObj.getString("senderName"),
+                                    senderEmail = childObj.getString("senderEmail"),
+                                    timestamp = childObj.getLong("timestamp"),
+                                    title = childObj.getString("title"),
+                                    eventID = childObj.getLong("eventID"),
+                                    verified = childObj.getBoolean("verified")
+                            )
+                            if (newNotification.verified) updatesList.add(newNotification)
+                        }
                     }
-                    appDB.storeUpdates(updatesList)
+                    appDB.storeUpdates(updatesList.toList())
                 }
                 */
 
