@@ -30,7 +30,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar_main)
         mTitles = ArrayList(Arrays.asList(*resources.getStringArray(R.array.menu_items_array)))
-        goToFragment(HomeFragment(), false)
+
+        supportFragmentManager.beginTransaction().let {
+            it.addToBackStack(null)
+            it.replace(R.id.main_container, HomeFragment()).commit()
+        }
         initializeDrawer()
         handleDrawerMenu()
     }
@@ -80,13 +84,9 @@ class MainActivity : AppCompatActivity() {
                 main_drawer_layout.closeDrawer()
             }
 
-            override fun onHeaderClicked() {
-                toast("Clicked Header")
-            }
+            override fun onHeaderClicked() {}
 
-            override fun onFooterClicked() {
-                toast("Clicked Footer")
-            }
+            override fun onFooterClicked() {}
         })
 
         main_menu.adapter = mMenuAdapter

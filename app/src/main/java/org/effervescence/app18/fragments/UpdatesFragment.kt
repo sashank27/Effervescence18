@@ -27,7 +27,6 @@ class UpdatesFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_updates, container, false)
     }
 
@@ -37,16 +36,14 @@ class UpdatesFragment : Fragment() {
 
         updates_RV_swipe.setOnRefreshListener { updateRecyclerView() }
         appDB = AppDB.getInstance(context!!)
-        mUpdatesAdapter = UpdatesAdapter(context!!) {
-        }
         buildRecyclerView()
     }
 
     private fun buildRecyclerView() {
-        updates_RV_swipe.isRefreshing = true
+        mUpdatesList = getAllUpdatesAndUpdateList()
+        mUpdatesAdapter = UpdatesAdapter(context!!, mUpdatesList)
         updates_RV.adapter = mUpdatesAdapter
         updates_RV.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        mUpdatesList = getAllUpdatesAndUpdateList()
     }
 
     private fun getAllUpdatesAndUpdateList(): ArrayList<Update> {
@@ -76,7 +73,6 @@ class UpdatesFragment : Fragment() {
                                 }
                             }
                             mUpdatesAdapter.setList(mUpdatesList)
-                            updates_RV_swipe.isRefreshing = false
                         } else { /*Show empty list image */ }
                     }
                     override fun onError(anError: ANError?) {
@@ -87,7 +83,10 @@ class UpdatesFragment : Fragment() {
     }
 
     private fun updateRecyclerView() {
+        updates_RV_swipe.isRefreshing = true
         mUpdatesList = getAllUpdatesAndUpdateList()
+        mUpdatesAdapter.setList(mUpdatesList)
+        updates_RV_swipe.isRefreshing = false
     }
 
     override fun onDetach() {
