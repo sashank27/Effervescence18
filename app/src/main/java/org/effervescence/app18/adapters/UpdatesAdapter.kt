@@ -63,10 +63,12 @@ class UpdatesAdapter(private val mContext: Context, private val itemClickListene
             timestamp.text = sdf.format(calendar.timeInMillis)
 
             itemView.setOnClickListener {
-                val eventDetailsIntent = Intent(context, EventDetailActivity::class.java)
-                val optionsCompat = ActivityOptions.makeSceneTransitionAnimation(context as Activity)
-                eventDetailsIntent.putExtra("event", appDB.getEventByID(update.eventID))
-                context.startActivity(eventDetailsIntent, optionsCompat.toBundle())
+                if (update.eventID != 0L) {
+                    val eventDetailsIntent = Intent(context, EventDetailActivity::class.java)
+                    val optionsCompat = ActivityOptions.makeSceneTransitionAnimation(context as Activity)
+                    eventDetailsIntent.putExtra("event", appDB.getEventByID(update.eventID))
+                    context.startActivity(eventDetailsIntent, optionsCompat.toBundle())
+                }
             }
         }
     }

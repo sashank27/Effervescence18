@@ -26,7 +26,7 @@ class AppDB private constructor(context: Context) {
 
     fun getAllDeveloperMembers() = developerHash.getAllValues<Developer>().sortedBy { it.id }
 
-    fun getAllUpdates() = updatesHash.getAllValues<Update>().sortedBy { it.timestamp }
+    fun getAllUpdates() = updatesHash.getAllValues<Update>().sortedBy { -(it.timestamp) }
 
     fun getEventsOfCategory(category: String) = eventHash.getAllValues<Event>()
             .filter { it.categories.contains(category) }
@@ -52,6 +52,6 @@ class AppDB private constructor(context: Context) {
 
     fun storeDevelopers(developers: List<Developer>) = developers.forEach { developerHash.put(it.id, it) }
 
-    fun storeUpdates(updates: ArrayList<Update>) = updates.forEach { updatesHash.put(it.eventID, it) }
+    fun storeUpdates(updates: ArrayList<Update>) = updates.forEach { updatesHash.put(it.timestamp, it) }
 
 }

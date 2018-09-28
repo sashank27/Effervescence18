@@ -72,7 +72,6 @@ class UpdatesFragment : Fragment() {
                                             eventID = childObj.getLong("eventID"),
                                             verified = childObj.getBoolean("verified")
                                     )
-
                                     if (newNotification.verified) mUpdatesList.add(newNotification)
                                 }
                             }
