@@ -71,7 +71,7 @@ class EventAdapter(val context: Context, private val itemClick: (Event) -> Unit)
 
             EventTimeView.text = sdf.format(calendar.time)
 
-            sdf.applyPattern("MMMM d, yyyy")
+            sdf.applyPattern("d MMM")
             EventDayView.text = sdf.format(calendar.time)
 
             Glide.with(context).load(event.imageUrl).apply(requestOption).into(EventImageView)

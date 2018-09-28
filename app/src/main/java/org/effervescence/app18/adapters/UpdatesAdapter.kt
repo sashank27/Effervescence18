@@ -57,7 +57,7 @@ class UpdatesAdapter(private val mContext: Context, private var updates: ArrayLi
             val calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/India"))
             calendar.timeInMillis = update.timestamp
 
-            val sdf = SimpleDateFormat("hh:mm a | dd/MM")
+            val sdf = SimpleDateFormat("hh:mm a\ndd/MM")
 
             timestamp.text = sdf.format(calendar.timeInMillis)
 
