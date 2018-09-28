@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.bookmark_event_layout.view.*
@@ -25,7 +26,8 @@ import java.util.*
  * Created by betterclever on 17/09/17.
  */
 
-class BookmarksAdapter(val context: Context) : RecyclerView.Adapter<BookmarksAdapter.ViewHolder>() {
+class BookmarksAdapter(val context: Context, val itemClick : () -> Unit) :
+        RecyclerView.Adapter<BookmarksAdapter.ViewHolder>() {
 
     private val events = ArrayList<Event>()
 
@@ -33,7 +35,7 @@ class BookmarksAdapter(val context: Context) : RecyclerView.Adapter<BookmarksAda
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
             ViewHolder(LayoutInflater.from(parent.context)
-                    .inflate(R.layout.bookmark_event_layout, parent, false))
+                    .inflate(R.layout.bookmark_event_layout, parent, false), itemClick)
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bindItem(context, this, events[position], position)
@@ -54,10 +56,11 @@ class BookmarksAdapter(val context: Context) : RecyclerView.Adapter<BookmarksAda
         notifyItemRangeChanged(position, itemCount)
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(itemView: View, private val itemClick : () -> Unit) : RecyclerView.ViewHolder(itemView) {
         val titleView = itemView.findViewById<TextView>(R.id.titleTextView)
         val timeView = itemView.findViewById<TextView>(R.id.timeTextView)
         val locationView = itemView.findViewById<TextView>(R.id.locationTextView)
+
         fun bindItem(context: Context, adapter: BookmarksAdapter, event: Event, position: Int) {
             titleView.text = event.name
 
@@ -93,6 +96,7 @@ class BookmarksAdapter(val context: Context) : RecyclerView.Adapter<BookmarksAda
                 val appDB = AppDB.getInstance(context)
                 adapter.deleteEvent(event, position)
                 appDB.removeBookmark(event.id)
+                itemClick()
             }
         }
     }

@@ -54,7 +54,12 @@ class HomeFragment : Fragment() {
 
         appDB = AppDB.getInstance(context!!)
         val upcomingAdapter = UpcomingAdapter(context!!)
-        val bookmarksAdapter = BookmarksAdapter(context!!)
+        val bookmarksAdapter = BookmarksAdapter(context!!) {
+            if (appDB.getBookmarkedEvents().isEmpty()) {
+                bookmarks_TV.visibility = View.GONE
+                bookmarksRecyclerView.visibility = View.GONE
+            }
+        }
         upcomingRecyclerView.adapter = upcomingAdapter
         bookmarksRecyclerView.adapter = bookmarksAdapter
 
@@ -65,6 +70,7 @@ class HomeFragment : Fragment() {
                 .subList(0, 10))
 
         if (appDB.getBookmarkedEvents().isEmpty()) {
+            bookmarks_TV.visibility = View.GONE
             bookmarksRecyclerView.visibility = View.GONE
         } else {
             bookmarksRecyclerView.visibility = View.VISIBLE
@@ -77,11 +83,11 @@ class HomeFragment : Fragment() {
         super.onResume()
 
         if (appDB.getBookmarkedEvents().isEmpty()) {
+            bookmarks_TV.visibility = View.GONE
             bookmarksRecyclerView.visibility = View.GONE
-            noDataText.visibility = View.VISIBLE
         } else {
+            bookmarks_TV.visibility = View.VISIBLE
             bookmarksRecyclerView.visibility = View.VISIBLE
-            noDataText.visibility = View.GONE
             (bookmarksRecyclerView.adapter as BookmarksAdapter).clearData()
             appDB.getBookmarkedEvents().let {
                 (bookmarksRecyclerView.adapter as BookmarksAdapter)
