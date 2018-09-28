@@ -7,27 +7,23 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.SharedPreferences
 import android.net.ConnectivityManager
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
-import android.view.animation.Animation
-import android.view.animation.AnimationSet
-import android.view.animation.TranslateAnimation
 import com.squareup.moshi.Moshi
 import kotlinx.android.synthetic.main.activity_splash.*
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.effervescence.app18.R
-import org.effervescence.app18.models.*
+import org.effervescence.app18.models.Developer
+import org.effervescence.app18.models.Event
+import org.effervescence.app18.models.Person
+import org.effervescence.app18.models.Sponsor
 import org.effervescence.app18.utils.AnimatorListenerAdapter
 import org.effervescence.app18.utils.AppDB
-import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.*
-import org.json.JSONObject
-import java.sql.Timestamp
 
 
 class SplashActivity : AppCompatActivity(), AnkoLogger {
@@ -41,27 +37,27 @@ class SplashActivity : AppCompatActivity(), AnkoLogger {
         sharedPrefs = getSharedPreferences("AppPrefs", Context.MODE_PRIVATE)
 
         startLogoAnimation()
-//        animationView.setAnimation("loading_spinner_white.json")
-//        animationView.playAnimation()
-//        animationView.loop(true)
 
         time = System.currentTimeMillis()
         val lastTime = sharedPrefs.getLong("lastupdated", 0)
         Log.e("Skip", "$time and $lastTime")
         when {
             isNetworkConnectionAvailable() -> {
-                if((time - lastTime) > 0){
+                if ((time - lastTime) > 172300000) {
                     fetchLatestData()
-                    sharedPrefs.edit().putLong("lastupdated",time).apply()
-                }else{
-                    Log.e("Skip", "Skipping")
-                    startActivity<MainActivity>()
-                    finish()
+                    sharedPrefs.edit().putLong("lastupdated", time).apply()
+                } else {
+                    Handler().postDelayed({
+                        Log.e("Skip", "Skipping")
+                        startActivity<MainActivity>()
+                        finish()
+                    }, 2000)
                 }
-
             }
             !sharedPrefs.getBoolean("firstrun", true) -> {
-//                showFinishedAnimation()
+                Handler().postDelayed({
+                    showFinishedAnimation()
+                }, 2000)
             }
             else -> {
 //                animationView.cancelAnimation()

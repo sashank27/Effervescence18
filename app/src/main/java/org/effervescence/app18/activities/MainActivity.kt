@@ -98,7 +98,9 @@ class MainActivity : AppCompatActivity() {
         if (addToBackStack)
             transaction.addToBackStack(null)
 
-        transaction.replace(R.id.main_container, fragment).commit()
+        Handler().postDelayed({
+            transaction.replace(R.id.main_container, fragment).commit()
+        }, 300)
     }
 
 
