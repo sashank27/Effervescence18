@@ -37,7 +37,7 @@ class SplashActivity : AppCompatActivity(), AnkoLogger {
         sharedPrefs = getSharedPreferences("AppPrefs", Context.MODE_PRIVATE)
 
         startLogoAnimation()
-
+      
         time = System.currentTimeMillis()
         val lastTime = sharedPrefs.getLong("lastupdated", 0)
         Log.e("Skip", "$time and $lastTime")

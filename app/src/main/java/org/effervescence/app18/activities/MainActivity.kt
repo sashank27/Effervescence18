@@ -13,6 +13,7 @@ import org.effervescence.app18.R
 import org.effervescence.app18.adapters.MainMenuAdapter
 import org.effervescence.app18.fragments.HomeFragment
 import org.effervescence.app18.fragments.InfoFragment
+import org.effervescence.app18.fragments.ProShowsFragment
 import org.effervescence.app18.fragments.UpdatesFragment
 import org.jetbrains.anko.toast
 import java.util.*
@@ -61,8 +62,8 @@ class MainActivity : AppCompatActivity() {
 
                         }
                         2 -> {
-                            toast("ProShows Fragment")
-
+                            goToFragment(ProShowsFragment(), false)
+                            currentPage = 2
                         }
                         3 -> {
                             goToFragment(UpdatesFragment(), false)

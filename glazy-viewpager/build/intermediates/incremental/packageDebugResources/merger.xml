@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main$Generated" generated="true"><source path="/home/rahul/AndroidStudioProjects/Effervescence18/glazy-viewpager/src/main/res"/><source path="/home/rahul/AndroidStudioProjects/Effervescence18/glazy-viewpager/build/generated/res/rs/debug"/><source path="/home/rahul/AndroidStudioProjects/Effervescence18/glazy-viewpager/build/generated/res/resValues/debug"/></dataSet><dataSet config="main" generated-set="main$Generated"><source path="/home/rahul/AndroidStudioProjects/Effervescence18/glazy-viewpager/src/main/res"><file name="layout_page" path="/home/rahul/AndroidStudioProjects/Effervescence18/glazy-viewpager/src/main/res/layout/layout_page.xml" qualifiers="" type="layout"/><file path="/home/rahul/AndroidStudioProjects/Effervescence18/glazy-viewpager/src/main/res/values/strings.xml" qualifiers=""><string name="app_name">Glazy</string></file><file path="/home/rahul/AndroidStudioProjects/Effervescence18/glazy-viewpager/src/main/res/values/attrs.xml" qualifiers=""><attr format="reference" name="src"/><attr format="enum" name="cutType">
+        <enum name="linePositive" value="0"/>
+        <enum name="lineNegative" value="1"/>
+        <enum name="arc" value="2"/>
+        <enum name="wave" value="3"/>
+    </attr><attr format="dimension" name="cutHeight"/><attr format="integer" name="cutCount"/><attr format="boolean" name="autoTint"/><attr format="color" name="tintColor"/><attr format="integer" name="tintAlpha"/><attr format="string" name="titleText"/><attr format="color" name="titleTextColor"/><attr format="dimension" name="titleTextSize"/><attr format="string" name="subTitleText"/><attr format="color" name="subTitleTextColor"/><attr format="dimension" name="subTitleTextSize"/><attr format="dimension" name="textMargin"/><attr format="dimension" name="lineSpacing"/><attr format="float" name="openFactor"/><declare-styleable name="GlazyImageView">
+
+        <attr name="src"/>
+
+        <attr name="cutType"/>
+        <attr name="cutHeight"/>
+        <attr name="cutCount"/>
+
+        <attr name="autoTint"/>
+        <attr name="tintColor"/>
+        <attr name="tintAlpha"/>
+
+        <attr name="titleText"/>
+        <attr name="titleTextColor"/>
+        <attr name="titleTextSize"/>
+        <attr name="subTitleText"/>
+        <attr name="subTitleTextColor"/>
+        <attr name="subTitleTextSize"/>
+        <attr name="textMargin"/>
+        <attr name="lineSpacing"/>
+
+        <attr name="openFactor"/>
+
+    </declare-styleable><declare-styleable name="GlazyViewPager">
+
+    </declare-styleable></file></source><source path="/home/rahul/AndroidStudioProjects/Effervescence18/glazy-viewpager/build/generated/res/rs/debug"/><source path="/home/rahul/AndroidStudioProjects/Effervescence18/glazy-viewpager/build/generated/res/resValues/debug"/></dataSet><dataSet config="debug$Generated" generated="true"><source path="/home/rahul/AndroidStudioProjects/Effervescence18/glazy-viewpager/src/debug/res"/></dataSet><dataSet config="debug" generated-set="debug$Generated"><source path="/home/rahul/AndroidStudioProjects/Effervescence18/glazy-viewpager/src/debug/res"/></dataSet><mergedItems><configuration qualifiers=""><declare-styleable name="GlazyViewPager"/><declare-styleable name="GlazyImageView"><attr name="src"/><attr name="cutType"/><attr name="cutHeight"/><attr name="cutCount"/><attr name="autoTint"/><attr name="tintColor"/><attr name="tintAlpha"/><attr name="titleText"/><attr name="titleTextColor"/><attr name="titleTextSize"/><attr name="subTitleText"/><attr name="subTitleTextColor"/><attr name="subTitleTextSize"/><attr name="textMargin"/><attr name="lineSpacing"/><attr name="openFactor"/></declare-styleable></configuration></mergedItems></merger>
