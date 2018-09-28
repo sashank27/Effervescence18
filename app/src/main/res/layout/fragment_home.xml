@@ -14,9 +14,10 @@
         tools:context=".fragments.HomeFragment">
 
         <TextView
+            android:id="@+id/bookmarks_TV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/comfortaa_light"
+            android:fontFamily="@font/autour_one"
             android:padding="8dp"
             android:text="Bookmarks"
             android:textColor="@android:color/black"
@@ -28,23 +29,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layoutAnimation="@anim/layout_animation_slide_from_right"
-            android:overScrollMode="never"></android.support.v7.widget.RecyclerView>
-
-        <TextView
-            android:id="@+id/noDataText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="8dp"
-            android:text="Bookmark your favourite events :)"
-            android:textColor="@android:color/black"
-            android:textSize="18sp" />
+            android:overScrollMode="never">
+        </android.support.v7.widget.RecyclerView>
 
         <TextView
             android:id="@+id/upcoming_TV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/comfortaa_light"
+            android:fontFamily="@font/autour_one"
             android:padding="8dp"
             android:text="Upcoming"
             android:textColor="@android:color/black"
@@ -56,7 +48,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layoutAnimation="@anim/layout_animation_slide_from_bottom"
-            android:overScrollMode="never"></android.support.v7.widget.RecyclerView>
+            android:overScrollMode="never">
+        </android.support.v7.widget.RecyclerView>
 
     </LinearLayout>
 
