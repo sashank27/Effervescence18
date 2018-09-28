@@ -59,9 +59,6 @@ class SponsorAdapter(val context: Context, private val itemClick : (Sponsor) -> 
                         Toast.makeText(context, "Unable to open web page", Toast.LENGTH_SHORT).show()
                     }
                 }
-
-                if(sponsor.website.isNotEmpty())
-                    customTabsIntent.launchUrl(context, Uri.parse(sponsor.website))
             }
         }
     }

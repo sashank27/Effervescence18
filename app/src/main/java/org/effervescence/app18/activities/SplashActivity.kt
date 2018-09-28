@@ -96,7 +96,7 @@ class SplashActivity : AppCompatActivity(), AnkoLogger {
 
             try {
                 val request = Request.Builder()
-                        .url("https://effervescence-iiita.github.io/Effervescence17/data/events.json")
+                        .url("https://effervescence-iiita.github.io/Effervescence18/data/events.json")
                         .build()
 
 

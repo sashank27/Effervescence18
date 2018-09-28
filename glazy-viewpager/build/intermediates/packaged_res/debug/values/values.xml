@@ -21,7 +21,32 @@
     <attr format="string" name="titleText"/>
     <attr format="color" name="titleTextColor"/>
     <attr format="dimension" name="titleTextSize"/>
-    <declare-styleable name="GlazyImageView"><attr name="src"/><attr name="cutType"/><attr name="cutHeight"/><attr name="cutCount"/><attr name="autoTint"/><attr name="tintColor"/><attr name="tintAlpha"/><attr name="titleText"/><attr name="titleTextColor"/><attr name="titleTextSize"/><attr name="subTitleText"/><attr name="subTitleTextColor"/><attr name="subTitleTextSize"/><attr name="textMargin"/><attr name="lineSpacing"/><attr name="openFactor"/></declare-styleable>
-    <declare-styleable name="GlazyViewPager"/>
+    <declare-styleable name="GlazyImageView">
+
+        <attr name="src"/>
+
+        <attr name="cutType"/>
+        <attr name="cutHeight"/>
+        <attr name="cutCount"/>
+
+        <attr name="autoTint"/>
+        <attr name="tintColor"/>
+        <attr name="tintAlpha"/>
+
+        <attr name="titleText"/>
+        <attr name="titleTextColor"/>
+        <attr name="titleTextSize"/>
+        <attr name="subTitleText"/>
+        <attr name="subTitleTextColor"/>
+        <attr name="subTitleTextSize"/>
+        <attr name="textMargin"/>
+        <attr name="lineSpacing"/>
+
+        <attr name="openFactor"/>
+
+    </declare-styleable>
+    <declare-styleable name="GlazyViewPager">
+
+    </declare-styleable>
     <string name="app_name">Glazy</string>
 </resources>
