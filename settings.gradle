@@ -1,1 +1,2 @@
 include ':app', ':navigation-toolbar'
+include ':app', ':glazy-viewpager'
