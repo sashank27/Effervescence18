@@ -63,11 +63,23 @@ class HomeFragment : Fragment() {
         upcomingRecyclerView.adapter = upcomingAdapter
         bookmarksRecyclerView.adapter = bookmarksAdapter
 
-        upcomingAdapter.addEvents(appDB.getAllEvents()
-                .filter { ((it.timestamp - 5 * 60 * 60 - 30 * 60) < System.currentTimeMillis() / 1000L)
-                        .and(it.timestamp != 2L) }
-                .sortedBy { it.timestamp }
-                .subList(0, 10))
+        val eventsListSize = appDB.getAllEvents().size
+        if (eventsListSize < 10) {
+            upcomingAdapter.addEvents(appDB.getAllEvents()
+                    .filter {
+                        ((it.timestamp - 5 * 60 * 60 - 30 * 60) < System.currentTimeMillis() / 1000L)
+                                .and(it.timestamp != 2L)
+                    }
+                    .sortedBy { it.timestamp })
+        } else {
+            upcomingAdapter.addEvents(appDB.getAllEvents()
+                    .filter {
+                        ((it.timestamp - 5 * 60 * 60 - 30 * 60) < System.currentTimeMillis() / 1000L)
+                                .and(it.timestamp != 2L)
+                    }
+                    .sortedBy { it.timestamp }
+                    .subList(0, 9))
+        }
 
         if (appDB.getBookmarkedEvents().isEmpty()) {
             bookmarks_TV.visibility = View.GONE

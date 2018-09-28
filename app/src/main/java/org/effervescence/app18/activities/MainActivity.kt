@@ -31,10 +31,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar_main)
         mTitles = ArrayList(Arrays.asList(*resources.getStringArray(R.array.menu_items_array)))
 
-        supportFragmentManager.beginTransaction().let {
-            it.addToBackStack(null)
-            it.replace(R.id.main_container, HomeFragment()).commit()
-        }
+        goToFragment(HomeFragment(), false)
         initializeDrawer()
         handleDrawerMenu()
     }
