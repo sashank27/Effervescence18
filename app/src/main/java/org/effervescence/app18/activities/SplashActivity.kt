@@ -12,8 +12,12 @@ import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
+import com.androidnetworking.AndroidNetworking
+import com.androidnetworking.error.ANError
+import com.androidnetworking.interfaces.JSONObjectRequestListener
 import com.squareup.moshi.Moshi
 import kotlinx.android.synthetic.main.activity_splash.*
+import kotlinx.android.synthetic.main.fragment_updates.*
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.effervescence.app18.R
@@ -26,8 +30,8 @@ import org.json.JSONObject
 
 class SplashActivity : AppCompatActivity(), AnkoLogger {
 
-    private lateinit var sharedPrefs: SharedPreferences
     private var time = 0L
+    private lateinit var sharedPrefs: SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
@@ -35,7 +39,7 @@ class SplashActivity : AppCompatActivity(), AnkoLogger {
         sharedPrefs = getSharedPreferences("AppPrefs", Context.MODE_PRIVATE)
 
         startLogoAnimation()
-      
+
         time = System.currentTimeMillis()
         val lastTime = sharedPrefs.getLong("lastupdated", 0)
         Log.e("Skip", "$time and $lastTime")
@@ -154,36 +158,37 @@ class SplashActivity : AppCompatActivity(), AnkoLogger {
                     }
                 }
 
-                /*
-                val request5 = Request.Builder()
-                        .url("https://effervescence18-6e63f.firebaseio.com/updates.json")
+                val mUpdatesList = ArrayList<Update>()
+                AndroidNetworking.get("https://effervescence18-6e63f.firebaseio.com/updates.json")
                         .build()
-                val response5 = client.newCall(request5).execute()
+                        .getAsJSONObject(object : JSONObjectRequestListener {
+                            override fun onResponse(response: JSONObject?) {
+                                if (response != null) {
+                                    val keys = response.keys()
+                                    while (keys.hasNext()) {
+                                        val currentKey = keys.next()
+                                        val childObj = response.getJSONObject(currentKey)
+                                        if (childObj != null) {
+                                            val newNotification = Update(
+                                                    description = childObj.getString("description"),
+                                                    senderName = childObj.getString("senderName"),
+                                                    senderEmail = childObj.getString("senderEmail"),
+                                                    timestamp = childObj.getLong("timestamp"),
+                                                    title = childObj.getString("title"),
+                                                    eventID = childObj.getLong("eventID"),
+                                                    verified = childObj.getBoolean("verified")
+                                            )
+                                            if (newNotification.verified) mUpdatesList.add(newNotification)
+                                        }
+                                    }
+                                    appDB.storeUpdates(mUpdatesList)
+                                }
+                            }
 
-                if (response5.isSuccessful) {
-                    val updatesList = ArrayList<Update>()
-                    val responseBody = JSONObject(response5.body()?.string())
-                    val keys = responseBody.keys()
-
-                    while (keys.hasNext()) {
-                        val currentKey = keys.next()
-                        val childObj = responseBody.getJSONObject(currentKey)
-                        if (childObj != null) {
-                            val newNotification = Update(
-                                    description = childObj.getString("description"),
-                                    senderName = childObj.getString("senderName"),
-                                    senderEmail = childObj.getString("senderEmail"),
-                                    timestamp = childObj.getLong("timestamp"),
-                                    title = childObj.getString("title"),
-                                    eventID = childObj.getLong("eventID"),
-                                    verified = childObj.getBoolean("verified")
-                            )
-                            if (newNotification.verified) updatesList.add(newNotification)
-                        }
-                    }
-                    appDB.storeUpdates(updatesList.toList())
-                }
-                */
+                            override fun onError(anError: ANError?) {
+                                //Show connectivity problem text
+                            }
+                        })
 
                 uiThread {
                     if (!response.isSuccessful || !response2.isSuccessful || !response3.isSuccessful || !response4.isSuccessful) {
