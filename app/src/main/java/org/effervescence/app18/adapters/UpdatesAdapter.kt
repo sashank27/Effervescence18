@@ -20,10 +20,9 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class UpdatesAdapter(private val mContext: Context, private val itemClickListener: (Update) -> Unit):
+class UpdatesAdapter(private val mContext: Context, private var updates: ArrayList<Update>):
         RecyclerView.Adapter<UpdatesAdapter.UpdateViewHolder>() {
 
-    private var updates= ArrayList<Update>()
     var appDB: AppDB = AppDB.getInstance(mContext)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UpdateViewHolder {

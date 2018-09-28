@@ -4,7 +4,7 @@
     <string-array name="menu_items_array">
         <item>Home</item>
         <item>Events</item>
-        <item>ProShows</item>
+        <item>Pro Shows</item>
         <item>Updates</item>
         <item>Info</item>
     </string-array>
