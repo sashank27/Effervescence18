@@ -101,7 +101,7 @@ class MainActivity : AppCompatActivity() {
 
         Handler().postDelayed({
             transaction.replace(R.id.main_container, fragment).commit()
-        }, 300)
+        }, 250)
     }
 
 
