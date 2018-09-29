@@ -136,8 +136,9 @@ class EventDetailActivity : AppCompatActivity() {
                 view.organizerName.text = it.name
                 callNumber = it.phoneNumber.toString()
                 view.organizerNumber.text = callNumber
-
                 view.callButton.setOnClickListener {
+                    callNumber = it.tag as String
+                    Log.v("Clicked", "$callNumber")
                     if (ContextCompat.checkSelfPermission(this,
                                     Manifest.permission.CALL_PHONE)
                             != PackageManager.PERMISSION_GRANTED) {
@@ -147,6 +148,7 @@ class EventDetailActivity : AppCompatActivity() {
                     } else
                         startActivity(Intent(Intent.ACTION_CALL).setData(Uri.parse("tel:" + callNumber)))
                 }
+                view.callButton.tag = callNumber
                 organizerLinearLayout.addView(view)
             }
         }else {
