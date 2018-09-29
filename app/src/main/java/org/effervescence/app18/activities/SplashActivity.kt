@@ -42,10 +42,12 @@ class SplashActivity : AppCompatActivity(), AnkoLogger {
 
         time = System.currentTimeMillis()
         val lastTime = sharedPrefs.getLong("lastupdated", 0)
-        Log.e("Skip", "$time and $lastTime")
+        val timeGap = sharedPrefs.getInt("timeHours", 0) * 60 * 60 * 1000
+
+        Log.e("Skip", "$time and $lastTime $timeGap")
         when {
             isNetworkConnectionAvailable() -> {
-                if ((time - lastTime) > 172300000) {
+                if ((time - lastTime) > timeGap) {
                     fetchLatestData()
                     sharedPrefs.edit().putLong("lastupdated", time).apply()
                 } else {
@@ -157,6 +159,24 @@ class SplashActivity : AppCompatActivity(), AnkoLogger {
                         appDB.storeDevelopers(developersArray.toList())
                     }
                 }
+
+
+                AndroidNetworking.get("https://effervescence-iiita.github.io/Effervescence18/data/time.json")
+                        .build()
+                        .getAsJSONObject(object :JSONObjectRequestListener{
+                            override fun onResponse(response: JSONObject?) {
+                                if (response != null) {
+                                    val hours = response.getInt("timeHours")
+                                    sharedPrefs.edit().putInt("timeHours", hours).apply()
+                                    Log.d("Time Hour", hours.toString())
+                                }
+                            }
+
+                            override fun onError(anError: ANError?) {
+
+                            }
+
+                        })
 
                 val mUpdatesList = ArrayList<Update>()
                 AndroidNetworking.get("https://effervescence18-6e63f.firebaseio.com/updates.json")
