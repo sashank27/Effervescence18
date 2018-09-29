@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var mTitles: ArrayList<String>
     private lateinit var mMenuAdapter: MainMenuAdapter
-    private var currentPage = 0
+    private var mCurrentPage = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,11 +49,11 @@ class MainActivity : AppCompatActivity() {
 
                 }
 
-                if (currentPage != position) {
+                if (mCurrentPage != position) {
                     when (position) {
                         0 -> {
-                            currentPage = 0
                             goToFragment(HomeFragment(), false)
+                            mCurrentPage = 0
                         }
                         1 -> {
                             Handler().postDelayed({
@@ -64,17 +64,17 @@ class MainActivity : AppCompatActivity() {
                         }
                         2 -> {
                             goToFragment(ProShowsFragment(), false)
-                            currentPage = 2
+                            mCurrentPage = 2
                         }
                         3 -> {
                             goToFragment(UpdatesFragment(), false)
-                            currentPage = 3
+                            mCurrentPage = 3
                         }
                         4 -> {
                             goToFragment(InfoFragment(), false)
-                            currentPage = 4
+                            mCurrentPage = 4
                         }
-                        else -> toast("Home Fragment")
+                        else -> toast("Something deadly happened.")
                     }
                 }
 
@@ -82,7 +82,6 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onHeaderClicked() {}
-
             override fun onFooterClicked() {}
         })
 
@@ -101,7 +100,6 @@ class MainActivity : AppCompatActivity() {
         }, 250)
     }
 
-
     private fun initializeDrawer() {
 
         val drawerToggle = DuoDrawerToggle(this, main_drawer_layout, toolbar_main,
@@ -112,5 +110,15 @@ class MainActivity : AppCompatActivity() {
         drawerToggle.syncState()
 
         main_drawer_layout.closeDrawer()
+    }
+
+    override fun onBackPressed() {
+        if (mCurrentPage == 0)
+            super.onBackPressed()
+        else {
+            goToFragment(HomeFragment(), false)
+            mMenuAdapter.setSelectedView(0)
+            mCurrentPage = 0
+        }
     }
 }

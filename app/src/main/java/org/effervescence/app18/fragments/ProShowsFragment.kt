@@ -32,6 +32,7 @@ class ProShowsFragment : Fragment() {
 
         val imgSunidhi = resources.getIdentifier("celebnight", "drawable", activity!!.packageName)
         val imgHumour = resources.getIdentifier("humournight", "drawable", activity!!.packageName)
+        val imgEDM = resources.getIdentifier("edmnight", "drawable", activity!!.packageName)
 
 
         val desc_celeb = "They say that when you become a celebrity ,you own the world and the world owns you. " +
@@ -40,7 +41,7 @@ class ProShowsFragment : Fragment() {
 
         val desc_edm = "EDM isn’t just about drops and rave, it is the form of music that has something to offer" +
                 " to everyone. Get ready to match you heartbeats with the beats and drops and dance your heart out " +
-                "with famous Portuguese DJ duos, Club Banditz, all set to raise the electric mood in the atmosphere!"
+                "with famous ZEPHYRTONE all set to raise the electric mood in the atmosphere!"
 
         val desc_kavyom = "Gear up to enjoy the Infinite Sky of Poetry at Kavyom, being held for the very first " +
                 "time in IIIT Allahabad. Relish an indelible and a stupendous evening with the one and only, Kumar " +
@@ -84,6 +85,16 @@ class ProShowsFragment : Fragment() {
                         .withImageCutHeightDP(50)
         )
 
+
+        pagerAdapter.addCardItem(
+                GlazyCard()
+                        .withTitle("EDM NIGHT")
+                        .withSubTitle("5th October")
+                        .withDescription(desc_edm.toUpperCase())
+                        .withImageRes(imgEDM)
+                        .withImageCutType(ImageCutType.ARC)
+                        .withImageCutHeightDP(50)
+        )
 
         pager.adapter = pagerAdapter
         pager.pageMargin = Utils.dpToPx(context, 25)
