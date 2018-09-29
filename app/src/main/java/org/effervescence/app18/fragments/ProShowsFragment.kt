@@ -29,16 +29,14 @@ class ProShowsFragment : Fragment() {
 
     private fun setupViewPager(view: View) {
         val resources = context!!.resources
-        val imgKumar = resources.getIdentifier("kumar", "drawable", activity!!.packageName)
-        val imgFarhan = resources.getIdentifier("farhan", "drawable", activity!!.packageName)
-        val imgEDM = resources.getIdentifier("edm", "drawable", activity!!.packageName)
-        val imgHumour = resources.getIdentifier("humour", "drawable", activity!!.packageName)
-        val imgCarlos = resources.getIdentifier("carlos", "drawable", activity!!.packageName)
-        val imgAlaska = resources.getIdentifier("alaska", "drawable", activity!!.packageName)
+
+        val imgSunidhi = resources.getIdentifier("celebnight", "drawable", activity!!.packageName)
+        val imgHumour = resources.getIdentifier("humournight", "drawable", activity!!.packageName)
+
 
         val desc_celeb = "They say that when you become a celebrity ,you own the world and the world owns you. " +
                 "So get ready to own the world as the bar has been raised up higher. After superstars like Neha " +
-                "Kakkar and Benny Dayal, Effervescence’17 proudly presents to you Farhan Akhtar on MTV Beats Night this October !"
+                "Kakkar,Benny Dayal and Farhan Akhtar, Effervescence’18 proudly presents to you Sunidhi Chauhan performing this October !"
 
         val desc_edm = "EDM isn’t just about drops and rave, it is the form of music that has something to offer" +
                 " to everyone. Get ready to match you heartbeats with the beats and drops and dance your heart out " +
@@ -50,10 +48,9 @@ class ProShowsFragment : Fragment() {
 
         val desc_humour = "The best thing about comedians apart from their wit and talent, is their confidence to bring " +
                 "out the mirth in small things! Known as one of the Rising Stars of Comedy in India, is one such comedian," +
-                " Abijit Ganguly! Tackling the most mundane Indian problems though his humor, he has performed stand up acts " +
-                "all over the country and entertained every generation. We're bringing in the pros, to help you forget your woes! " +
-                "So, prepare to burst your lungs out and laugh to the rant of the leading stand up comedian - Mr Abijit Ganguly on " +
-                "the Humor Night of Effervescence'17!"
+                " Aakash Gupta! We're bringing in the pros, to help you forget your woes! " +
+                "So, prepare to burst your lungs out and laugh to the rant of the leading stand up comedian - Mr Aakash Gupta on " +
+                "the Humor Night of Effervescence'18!"
 
         val desc_alaska = "Extending the star-studded lineup further towards foreign lands, we are thrilled to announce the arrival of Alaska Snack Time," +
                 " the famous Israeli band, to blend our theme 'An Indian Affair' with their own culture. Known for their remarkable work in the" +
@@ -69,60 +66,21 @@ class ProShowsFragment : Fragment() {
         pagerAdapter.addCardItem(
                 GlazyCard()
                         .withTitle("CELEB NIGHT")
-                        .withSubTitle("15th October")
+                        .withSubTitle("7th October")
                         .withDescription(desc_celeb.toUpperCase())
-                        .withImageRes(imgFarhan)
+                        .withImageRes(imgSunidhi)
                         .withImageCutType(ImageCutType.WAVE)
                         .withImageCutHeightDP(50)
         )
 
-        pagerAdapter.addCardItem(
-                GlazyCard()
-                        .withTitle("Supersonic NIGHT")
-                        .withSubTitle("13th October")
-                        .withDescription(desc_edm.toUpperCase())
-                        .withImageRes(imgEDM)
-                        .withImageCutType(ImageCutType.LINE_POSITIVE)
-                        .withImageCutHeightDP(50)
-        )
-
-        pagerAdapter.addCardItem(
-                GlazyCard()
-                        .withTitle("KAVYOM")
-                        .withSubTitle("14th October")
-                        .withDescription(desc_kavyom.toUpperCase())
-                        .withImageRes(imgKumar)
-                        .withImageCutType(ImageCutType.ARC)
-                        .withImageCutHeightDP(50)
-        )
 
         pagerAdapter.addCardItem(
                 GlazyCard()
                         .withTitle("HUMOUR NIGHT")
-                        .withSubTitle("14th October")
+                        .withSubTitle("6th October")
                         .withDescription(desc_humour.toUpperCase())
                         .withImageRes(imgHumour)
-                        .withImageCutType(ImageCutType.WAVE)
-                        .withImageCutHeightDP(50)
-        )
-
-        pagerAdapter.addCardItem(
-                GlazyCard()
-                        .withTitle("Horizon: Carlos Elliot Jr")
-                        .withSubTitle("12th October")
-                        .withDescription(desc_carlos.toUpperCase())
-                        .withImageRes(imgCarlos)
                         .withImageCutType(ImageCutType.LINE_POSITIVE)
-                        .withImageCutHeightDP(50)
-        )
-
-        pagerAdapter.addCardItem(
-                GlazyCard()
-                        .withTitle("Horizon: Alaska Snack Time")
-                        .withSubTitle("13th October")
-                        .withDescription(desc_alaska.toUpperCase())
-                        .withImageRes(imgAlaska)
-                        .withImageCutType(ImageCutType.WAVE)
                         .withImageCutHeightDP(50)
         )
 

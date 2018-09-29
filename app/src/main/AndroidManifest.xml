@@ -18,10 +18,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppThemeNoActionBar">
-        <activity android:name=".activities.MainActivity" />
+        <activity android:name=".activities.MainActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.SplashActivity"
-            android:theme="@style/AppThemeTransparentStatusBar">
+            android:theme="@style/AppThemeTransparentStatusBar"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,11 +33,13 @@
 
         <activity
             android:name=".activities.EventsActivity"
-            android:theme="@style/EventsTheme" />
+            android:theme="@style/EventsTheme"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.EventDetailActivity"
             android:label="Temp"
-            android:theme="@style/EventsDetialTheme" />
+            android:theme="@style/EventsDetialTheme"
+            android:screenOrientation="portrait"/>
 
 
         <service android:name=".services.MyFirebaseInstanceIDService">

@@ -23,7 +23,6 @@ class HomeFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
@@ -63,23 +62,14 @@ class HomeFragment : Fragment() {
         upcomingRecyclerView.adapter = upcomingAdapter
         bookmarksRecyclerView.adapter = bookmarksAdapter
 
-        val eventsListSize = appDB.getAllEvents().size
-        if (eventsListSize < 10) {
-            upcomingAdapter.addEvents(appDB.getAllEvents()
-                    .filter {
-                        ((it.timestamp - 5 * 60 * 60 - 30 * 60) < System.currentTimeMillis() / 1000L)
-                                .and(it.timestamp != 2L)
-                    }
-                    .sortedBy { it.timestamp })
-        } else {
-            upcomingAdapter.addEvents(appDB.getAllEvents()
-                    .filter {
-                        ((it.timestamp - 5 * 60 * 60 - 30 * 60) < System.currentTimeMillis() / 1000L)
-                                .and(it.timestamp != 2L)
-                    }
-                    .sortedBy { it.timestamp }
-                    .subList(0, 9))
+        var events = appDB.getAllEvents()
+                .filter { ((it.timestamp - 5 * 60 * 60 - 30 * 60) > System.currentTimeMillis() / 1000L)
+                        .and(it.timestamp != 2L) }
+                .sortedBy { it.timestamp }
+        if(events.size > 10){
+            events = events.subList(0, 10)
         }
+        upcomingAdapter.addEvents(events)
 
         if (appDB.getBookmarkedEvents().isEmpty()) {
             bookmarks_TV.visibility = View.GONE
