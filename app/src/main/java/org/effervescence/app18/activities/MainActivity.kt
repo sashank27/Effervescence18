@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun handleDrawerMenu() {
 
-        title = "Home"
+        title = "My Effe"
         mMenuAdapter = MainMenuAdapter(mTitles)
 
         main_menu.setOnMenuClickListener(object : DuoMenuView.OnMenuClickListener {

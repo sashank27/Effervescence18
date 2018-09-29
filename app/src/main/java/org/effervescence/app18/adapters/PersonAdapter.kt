@@ -8,13 +8,10 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
-import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
@@ -22,7 +19,7 @@ import com.bumptech.glide.request.RequestOptions
 import org.effervescence.app18.R
 import org.effervescence.app18.models.Person
 
-class PersonAdapter(val context: Context, private val itemClick : (Person) -> Unit) :
+class PersonAdapter(val context: Context) :
         RecyclerView.Adapter<PersonAdapter.PersonViewHolder>(){
 
     companion object {
@@ -37,7 +34,7 @@ class PersonAdapter(val context: Context, private val itemClick : (Person) -> Un
         else
             LayoutInflater.from(context).inflate(R.layout.indvidual_leader_view, parent, false)
 
-        return PersonViewHolder(itemView, itemClick)
+        return PersonViewHolder(itemView)
     }
 
     override fun getItemCount(): Int = personList.size
@@ -57,7 +54,7 @@ class PersonAdapter(val context: Context, private val itemClick : (Person) -> Un
         personList.addAll(newList)
         notifyDataSetChanged()
     }
-    inner class PersonViewHolder(itemView: View, private val itemClick: (Person) -> Unit) : RecyclerView.ViewHolder(itemView){
+    inner class PersonViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         private val personImageView = itemView.findViewById<ImageView>(R.id.eventImage)
         private val personNameView = itemView.findViewById<TextView>(R.id.eventNameTextView)
         private val personDesignationView = itemView.findViewById<TextView>(R.id.personDesignationTextView)

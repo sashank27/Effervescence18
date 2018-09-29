@@ -15,7 +15,7 @@ import com.bumptech.glide.request.RequestOptions
 import org.effervescence.app18.R
 import org.effervescence.app18.models.Sponsor
 
-class SponsorAdapter(val context: Context, private val itemClick : (Sponsor) -> Unit) :
+class SponsorAdapter(val context: Context) :
         RecyclerView.Adapter<SponsorAdapter.SponsorViewHolder>(){
 
     private var developerList = ArrayList<Sponsor>()
@@ -23,7 +23,7 @@ class SponsorAdapter(val context: Context, private val itemClick : (Sponsor) -> 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SponsorViewHolder {
         val itemView = LayoutInflater.from(context).inflate(R.layout.individual_sponsor_view, parent, false)
-        return SponsorViewHolder(itemView, itemClick)
+        return SponsorViewHolder(itemView)
     }
 
     override fun getItemCount(): Int = developerList.size
@@ -38,7 +38,7 @@ class SponsorAdapter(val context: Context, private val itemClick : (Sponsor) -> 
         developerList.addAll(newList)
         notifyDataSetChanged()
     }
-    inner class SponsorViewHolder(itemView: View, private val itemClick: (Sponsor) -> Unit) : RecyclerView.ViewHolder(itemView){
+    inner class SponsorViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         private val sponsorImageView = itemView.findViewById<ImageView>(R.id.sponsorImageView)
         private val sponsorNameView = itemView.findViewById<TextView>(R.id.sponsorNameTextView)
         private val sponsorTypeView = itemView.findViewById<TextView>(R.id.sponsorTypeTextView)

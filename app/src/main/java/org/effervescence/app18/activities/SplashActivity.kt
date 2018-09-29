@@ -15,6 +15,7 @@ import android.view.View
 import com.androidnetworking.AndroidNetworking
 import com.androidnetworking.error.ANError
 import com.androidnetworking.interfaces.JSONObjectRequestListener
+import com.crashlytics.android.Crashlytics
 import com.squareup.moshi.Moshi
 import kotlinx.android.synthetic.main.activity_splash.*
 import kotlinx.android.synthetic.main.fragment_updates.*

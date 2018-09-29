@@ -40,7 +40,7 @@ class EventDetailActivity : AppCompatActivity() {
         toolbar.setNavigationOnClickListener { onBackPressed() }
 
         appDB = AppDB.getInstance(this)
-        event = intent.getParcelableExtra<Event>("event")
+        event = intent.getParcelableExtra("event")
 
 
         setupInitialView()

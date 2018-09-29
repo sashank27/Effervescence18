@@ -38,10 +38,6 @@ class InfoFragment : Fragment() {
         view.tab_layout.setupWithViewPager(view.pager)
     }
 
-    override fun onResume() {
-        super.onResume()
-    }
-
     private inner class InfoAdapter internal constructor(fragmentManager: FragmentManager,
                                                          listOfSubFragments: List<Fragment>) : FragmentStatePagerAdapter(fragmentManager){
         private val titles = arrayOf( "TEAM", "DEVELOPERS", "SPONSORS", "ABOUT")
