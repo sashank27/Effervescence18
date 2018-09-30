@@ -1,5 +1,6 @@
 package org.effervescence.app18.activities
 
+import android.animation.ObjectAnimator
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Rect
@@ -31,14 +32,16 @@ class EventsActivity : AppCompatActivity() {
 
     private var prevAnchorPosition = 0
     val eventData = HashMap<String, List<Event>>()
+    var isExpanded = false
 
+    lateinit var mainHeader: NavigationToolBarLayout
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_events)
 
         val header = findViewById<NavigationToolBarLayout>(R.id.navigation_toolbar_layout)
         val viewPager = findViewById<ViewPager>(R.id.pager)
-
+        mainHeader = header
         doAsync {
             val appDB = AppDB.getInstance(this@EventsActivity)
 
@@ -127,37 +130,32 @@ class EventsActivity : AppCompatActivity() {
         drawerArrow.color = ContextCompat.getColor(this, android.R.color.white)
         drawerArrow.progress = 1f
 
-//        header.addHeaderChangeStateListener(object : HeaderLayoutManager.HeaderChangeStateListener() {
-//            private fun changeIcon(progress: Float) {
-//                ObjectAnimator.ofFloat(drawerArrow, "progress", progress).start()
-//                isExpanded = progress == 1f
-//                if (isExpanded) {
-//                    prevAnchorPosition = header.getAnchorPos()
-//                }
-//            }
-//
-//            override fun onMiddle() = changeIcon(0f)
-//            override fun onExpanded() = changeIcon(1f)
-//        })
+        header.addHeaderChangeStateListener(object : HeaderLayoutManager.HeaderChangeStateListener() {
+            private fun changeIcon(progress: Float) {
+                ObjectAnimator.ofFloat(drawerArrow, "progress", progress).start()
+                isExpanded = progress == 1f
+                if (isExpanded) {
+                    prevAnchorPosition = header.getAnchorPos()
+                }
+            }
 
+            override fun onMiddle() = changeIcon(0f)
+            override fun onExpanded() = changeIcon(1f)
+        })
+
+        header.isNestedScrollingEnabled = false
         val toolbar = header.toolBar
         toolbar.navigationIcon = drawerArrow
         toolbar.setNavigationOnClickListener {
-//            if (!isExpanded) {
-//                return@setNavigationOnClickListener
-//            }
-//            val anchorPos = header.getAnchorPos()
-//            if (anchorPos == HeaderLayout.INVALID_POSITION) {
-//                return@setNavigationOnClickListener
-//            }
-//
-//            if (anchorPos == prevAnchorPosition) {
-//                header.collapse()
-//            } else {
-//                header.smoothScrollToPosition(prevAnchorPosition)
-//            }
-
             onBackPressed()
+        }
+    }
+
+    override fun onBackPressed() {
+        if (!isExpanded) {
+            mainHeader.expand(true)
+        } else{
+            super.onBackPressed()
         }
     }
 
