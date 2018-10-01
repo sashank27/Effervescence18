@@ -19,7 +19,6 @@ class ProShowsFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_pro_shows, container, false)
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -33,7 +32,7 @@ class ProShowsFragment : Fragment() {
         val imgSunidhi = resources.getIdentifier("celebnight", "drawable", activity!!.packageName)
         val imgHumour = resources.getIdentifier("humournight", "drawable", activity!!.packageName)
         val imgEDM = resources.getIdentifier("edmnight", "drawable", activity!!.packageName)
-
+        val imgRock = resources.getIdentifier("localtrain", "drawable", activity!!.packageName)
 
         val desc_celeb = "They say that when you become a celebrity ,you own the world and the world owns you. " +
                 "So get ready to own the world as the bar has been raised up higher. After superstars like Neha " +
@@ -53,14 +52,10 @@ class ProShowsFragment : Fragment() {
                 "So, prepare to burst your lungs out and laugh to the rant of the leading stand up comedian - Mr Aakash Gupta on " +
                 "the Humor Night of Effervescence'18!"
 
-        val desc_alaska = "Extending the star-studded lineup further towards foreign lands, we are thrilled to announce the arrival of Alaska Snack Time," +
-                " the famous Israeli band, to blend our theme 'An Indian Affair' with their own culture. Known for their remarkable work in the" +
-                " mix of electronic music, African rhythms, hip-hop and even jazz, this band is all set to provide a refreshing new experience " +
-                "that leaves no indifferent ear!"
-
-        val desc_carlos = "Witness international artists perform live and engulf yourselves in the extravagance of art and culture at Horizon, " +
-                "Effervescence'17, we bring to you, Carlos Elliot Jr. Known as Latin America’s most internationally acclaimed independent artists," +
-                " Carlos is considered the pioneer of Mississippi Hill Country Blues. Don't miss the chance to get the feel of juke joints and backyard parties!"
+        val desc_local = "Now it’s time to relive and cherish some memories yet again, for Effervescence recreates it back, as we " +
+                "present to you the night which is going to mark the enigma of ultimate fiesta, the one and only, The Local Train. " +
+                "Now as the house is up and the fire within rises, join in for some surreal experiences and invigoration of wonder for the " +
+                "grounds of Effervescence would be waiting for you!"
 
         val pagerAdapter = GlazyFragmentPagerAdapter(childFragmentManager, context)
 
@@ -71,6 +66,16 @@ class ProShowsFragment : Fragment() {
                         .withDescription(desc_celeb.toUpperCase())
                         .withImageRes(imgSunidhi)
                         .withImageCutType(ImageCutType.WAVE)
+                        .withImageCutHeightDP(50)
+        )
+
+        pagerAdapter.addCardItem(
+                GlazyCard()
+                        .withTitle("ROCK NIGHT")
+                        .withSubTitle("6th October")
+                        .withDescription(desc_local.toUpperCase())
+                        .withImageRes(imgRock)
+                        .withImageCutType(ImageCutType.ARC)
                         .withImageCutHeightDP(50)
         )
 
@@ -92,7 +97,7 @@ class ProShowsFragment : Fragment() {
                         .withSubTitle("5th October")
                         .withDescription(desc_edm.toUpperCase())
                         .withImageRes(imgEDM)
-                        .withImageCutType(ImageCutType.ARC)
+                        .withImageCutType(ImageCutType.WAVE)
                         .withImageCutHeightDP(50)
         )
 
